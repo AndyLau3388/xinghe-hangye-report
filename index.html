@@ -16,9 +16,13 @@
   .meta-card { background: rgba(255,255,255,0.12); backdrop-filter: blur(10px); border-radius: 8px; padding: 10px; }
   .meta-card .label { font-size: 10px; color: rgba(255,255,255,0.8); }
   .meta-card .value { font-size: 18px; color: white; font-weight: 700; margin-top: 3px; }
-  .tab-nav { display: flex; gap: 4px; background: rgba(30, 41, 59, 0.6); border-radius: 12px 12px 0 0; border: 1px solid rgba(148, 163, 184, 0.15); border-bottom: none; padding: 8px 8px 0; backdrop-filter: blur(10px); overflow-x: auto; }
-  .tab-btn { flex: 1; min-width: 100px; background: transparent; color: #94a3b8; border: none; border-radius: 10px 10px 0 0; padding: 10px 8px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
-  .tab-btn:hover { background: rgba(245, 158, 11, 0.08); color: #fbbf24; }
+  .tab-nav { display: flex; gap: 4px; background: rgba(30, 41, 59, 0.6); border-radius: 12px 12px 0 0; border: 1px solid rgba(148, 163, 184, 0.15); border-bottom: none; padding: 8px 8px 0; backdrop-filter: blur(10px); overflow-x: auto; scrollbar-width: thin; }
+  .tab-nav::-webkit-scrollbar { height: 4px; }
+  .tab-nav::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+  .tab-nav::-webkit-scrollbar-thumb { background: rgba(245, 158, 11, 0.5); border-radius: 2px; }
+  .tab-btn { flex: 0 0 auto; min-width: auto; background: transparent; color: #94a3b8; border: 1px solid transparent; border-radius: 10px 10px 0 0; padding: 9px 12px; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s; white-space: nowrap; display: inline-flex; align-items: center; gap: 4px; }
+  .tab-btn .tab-count { background: rgba(245, 158, 11, 0.2); color: #fbbf24; padding: 1px 6px; border-radius: 8px; font-size: 10px; font-weight: 700; }
+  .tab-btn:hover { background: rgba(245, 158, 11, 0.08); color: #fbbf24; border-color: rgba(245, 158, 11, 0.2); }
   .tab-btn.active { background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(239, 68, 68, 0.15)); color: #fbbf24; }
   section { background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(148, 163, 184, 0.15); border-radius: 16px; padding: 22px; margin-bottom: 16px; backdrop-filter: blur(10px); }
   h2 { font-size: 19px; color: #f8fafc; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid #f59e0b; display: flex; align-items: center; gap: 10px; }
@@ -139,7 +143,7 @@
     .meta-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
     .meta-card .value { font-size: 14px; }
     section { padding: 12px; }
-    .tab-btn { min-width: 60px; font-size: 8px; padding: 6px 4px; }
+    .tab-btn { min-width: auto; font-size: 10px; padding: 6px 8px; }
     .score-card-body { grid-template-columns: 70px 1fr; }
     .big-score { font-size: 18px; }
   }
@@ -165,7 +169,7 @@
   </div>
 </div>
 
-<div class="tab-nav"><button class="tab-btn active" onclick="switchTab(0)">农业补种与农资 (7)</button><button class="tab-btn " onclick="switchTab(1)">AI 应用 (7)</button><button class="tab-btn " onclick="switchTab(2)">生物医药 (1)</button><button class="tab-btn " onclick="switchTab(3)">干旱地区灌溉与节水 (4)</button><button class="tab-btn " onclick="switchTab(4)">环境治理与消毒防疫 (8)</button><button class="tab-btn " onclick="switchTab(5)">电力设施抢修与配网升级 (6)</button><button class="tab-btn " onclick="switchTab(6)">白色家电 (10)</button><button class="tab-btn " onclick="switchTab(7)">工程机械与灾后重建 (8)</button><button class="tab-btn " onclick="switchTab(8)">新能源 (2)</button><button class="tab-btn " onclick="switchTab(9)">核电重启 (6)</button><button class="tab-btn " onclick="switchTab(10)">防暑降温及肠道药品 (3)</button><button class="tab-btn " onclick="switchTab(11)">电网设备与火电 (3)</button><button class="tab-btn " onclick="switchTab(12)">半导体 (1)</button><button class="tab-btn " onclick="switchTab(13)">软件开发 (1)</button><button class="tab-btn " onclick="switchTab(14)">水利设施修复与排涝 (7)</button></div>
+<div class="tab-nav"><button class="tab-btn active" onclick="switchTab(0)" title="农业补种与农资 (7只)" data-full="农业补种与农资">农业 <span class="tab-count">7</span></button><button class="tab-btn " onclick="switchTab(1)" title="AI 应用 (7只)" data-full="AI 应用">AI 应用 <span class="tab-count">7</span></button><button class="tab-btn " onclick="switchTab(2)" title="生物医药 (1只)" data-full="生物医药">生物 <span class="tab-count">1</span></button><button class="tab-btn " onclick="switchTab(3)" title="干旱地区灌溉与节水 (4只)" data-full="干旱地区灌溉与节水">节水灌溉 <span class="tab-count">4</span></button><button class="tab-btn " onclick="switchTab(4)" title="环境治理与消毒防疫 (8只)" data-full="环境治理与消毒防疫">环境治理 <span class="tab-count">8</span></button><button class="tab-btn " onclick="switchTab(5)" title="电力设施抢修与配网升级 (6只)" data-full="电力设施抢修与配网升级">电网修复 <span class="tab-count">6</span></button><button class="tab-btn " onclick="switchTab(6)" title="白色家电 (10只)" data-full="白色家电">白色家电 <span class="tab-count">10</span></button><button class="tab-btn " onclick="switchTab(7)" title="工程机械与灾后重建 (8只)" data-full="工程机械与灾后重建">机械重建 <span class="tab-count">8</span></button><button class="tab-btn " onclick="switchTab(8)" title="新能源 (2只)" data-full="新能源">新能源 <span class="tab-count">2</span></button><button class="tab-btn " onclick="switchTab(9)" title="核电重启 (6只)" data-full="核电重启">核电 <span class="tab-count">6</span></button><button class="tab-btn " onclick="switchTab(10)" title="防暑降温及肠道药品 (3只)" data-full="防暑降温及肠道药品">防暑 <span class="tab-count">3</span></button><button class="tab-btn " onclick="switchTab(11)" title="电网设备与火电 (3只)" data-full="电网设备与火电">电网火电 <span class="tab-count">3</span></button><button class="tab-btn " onclick="switchTab(12)" title="半导体 (1只)" data-full="半导体">半导体 <span class="tab-count">1</span></button><button class="tab-btn " onclick="switchTab(13)" title="软件开发 (1只)" data-full="软件开发">软件 <span class="tab-count">1</span></button><button class="tab-btn " onclick="switchTab(14)" title="水利设施修复与排涝 (7只)" data-full="水利设施修复与排涝">水利 <span class="tab-count">7</span></button></div>
 
 <div class="tab-pane" id="tab-0"><section class="logic-section"><h2><span class="num">IND</span>农业补种与农资</h2><p class="thesis">南方洪涝补种加病虫害加化肥加华北干旱</p><div class="logic-grid"><div class="logic-card"><div class="title">1 补种需求</div><div class="desc">水稻/玉米/蔬菜紧急补种</div></div><div class="logic-card"><div class="title">2 化肥需求</div><div class="desc">灾后复种带动复合肥需求</div></div><div class="logic-card"><div class="title">3 农药需求</div><div class="desc">涝后病虫害高发杀虫剂/杀菌剂需求上升</div></div><div class="logic-card"><div class="title">4 华北干旱</div><div class="desc">耐旱品种加节水灌溉需求</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
       <div class="score-card-header">
@@ -5440,7 +5444,7 @@
 </section>
 
 <footer>
-  报告生成: 2026-09-08T16:41:31.143158 · 数据基于 2026 H1 财报与 2026-09-08 行情 · 仅供研究参考<br>
+  报告生成: 2026-09-08T16:50:16.763333 · 数据基于 2026 H1 财报与 2026-09-08 行情 · 仅供研究参考<br>
   13 行业主题 · 74 只精选股 · 8 份独立深度报告已内嵌
 </footer>
 </div>
