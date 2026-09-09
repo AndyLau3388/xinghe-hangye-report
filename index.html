@@ -9743,22 +9743,6 @@ function toggleDetail(code, event) {
   if (panel.style.display === 'none') { panel.style.display = 'block'; setTimeout(() => panel.scrollIntoView({behavior: 'smooth', block: 'nearest'}), 100); }
   else { panel.style.display = 'none'; }
 }
-function openReport(filename, event) {
-  if (event) event.stopPropagation();
-  // 优先从内嵌的 REPORT_DATA 中获取（单文件版有效）
-  if (window.__REPORT_DATA__ && window.__REPORT_DATA__[filename]) {
-    const data = window.__REPORT_DATA__[filename];
-    const byteChars = atob(data.b64);
-    const byteArr = new Uint8Array(byteChars.length);
-    for (let i = 0; i < byteChars.length; i++) byteArr[i] = byteChars.charCodeAt(i);
-    const blob = new Blob([byteArr], { type: 'text/html;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    window.open(url, '_blank');
-  } else {
-    // 兜底：直接打开文件（GitHub Pages 部署后有效）
-    window.open(filename, '_blank');
-  }
-}
 document.addEventListener('DOMContentLoaded', () => { document.getElementById('tab-0').classList.add('active'); });
 
 // ===== 全部股票：搜索 + 排序 =====
@@ -9913,9 +9897,9 @@ function openReport(filename, event) {
       return;
     }
   }
-  // 2. Fallback：GitHub Pages URL (部署后能直接打开)
+  // 2. Fallback：GitHub Pages URL (部署后能直接打开,不要encode,GitHub会自动处理UTF-8)
   const baseUrl = window.location.origin + window.location.pathname.replace(/[^/]*$/, '');
-  const fullUrl = baseUrl + encodeURIComponent(filename);
+  const fullUrl = baseUrl + filename;
   window.open(fullUrl, '_blank');
 }
 </script>
