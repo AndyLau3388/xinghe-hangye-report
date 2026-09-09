@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>盾安环境（002011）· 深度分析报告 · 白色家电 · 2026-09-09</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif; background: linear-gradient(135deg, #061F32 0%, #001965 100%); color: #e2e8f0; min-height: 100vh; padding: 24px 16px 80px; line-height: 1.7; }
+.container { max-width: 960px; margin: 0 auto; }
+header { background: linear-gradient(135deg, #001965 0%, #08A6F6 100%); border-radius: 16px; padding: 28px 24px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(8, 166, 246, 0.2); }
+header h1 { font-size: 24px; color: white; margin-bottom: 4px; font-weight: 800; }
+header .sub { color: rgba(255,255,255,0.9); font-size: 13px; }
+.signal { display: inline-block; padding: 4px 12px; border-radius: 8px; font-weight: 800; font-size: 14px; margin: 8px 6px 0 0; }
+.signal.strong-buy { background: #177B57; color: white; }
+.signal.buy { background: rgba(23, 123, 87, 0.7); color: white; }
+.signal.hold { background: rgba(148, 163, 184, 0.5); color: white; }
+.signal.watch { background: #F47B39; color: white; }
+.signal.sell { background: #5A0E13; color: white; }
+.score { display: inline-block; padding: 4px 12px; border-radius: 8px; background: #F59E0B; color: #0f172a; font-weight: 800; font-size: 14px; margin: 8px 6px 0 0; }
+.oneliner { background: rgba(245, 158, 11, 0.1); border-left: 3px solid #F59E0B; padding: 10px 14px; border-radius: 6px; margin-top: 12px; color: #fbbf24; font-size: 14px; }
+section { background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(148, 163, 184, 0.15); border-radius: 16px; padding: 22px; margin-bottom: 16px; backdrop-filter: blur(10px); }
+h2 { font-size: 17px; color: #f8fafc; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid #08A6F6; }
+h3 { font-size: 15px; color: #08A6F6; margin: 14px 0 6px; }
+h4 { font-size: 14px; color: #fbbf24; margin: 10px 0 4px; }
+p, li { font-size: 13px; color: #cbd5e1; margin-bottom: 6px; }
+ul, ol { padding-left: 20px; }
+.pos { color: #10b981; font-weight: 700; }
+.neg { color: #f43f5e; font-weight: 700; }
+.pill { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 700; }
+.pill-buy { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+.pill-hold { background: rgba(148, 163, 184, 0.2); color: #94a3b8; }
+.pill-watch { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+.pill-sell { background: rgba(244, 63, 94, 0.2); color: #f43f5e; }
+.pill-strong-buy { background: rgba(16, 185, 129, 0.4); color: #6ee7b7; }
+table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 8px 0; }
+th { background: rgba(8, 166, 246, 0.15); color: #08A6F6; padding: 6px; text-align: left; }
+td { padding: 6px; border-bottom: 1px solid rgba(148, 163, 184, 0.1); color: #cbd5e1; }
+.note { font-size: 11px; color: #64748b; font-style: italic; }
+.thesis { font-size: 13px; padding: 8px 12px; background: rgba(245, 158, 11, 0.08); border-left: 3px solid #F59E0B; border-radius: 6px; margin: 6px 0; }
+.private-board { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 12px; margin: 8px 0; }
+.private-board h4 { color: #08A6F6; }
+.metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 12px 0; }
+.metric { background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px; text-align: center; }
+.metric-label { font-size: 10px; color: #94a3b8; }
+.metric-val { font-size: 14px; color: #fbbf24; font-weight: 700; margin-top: 2px; }
+footer { text-align: center; color: #64748b; font-size: 11px; padding: 20px; margin-top: 20px; border-top: 1px solid rgba(148, 163, 184, 0.15); }
+@media (max-width: 768px) { .metric-grid { grid-template-columns: repeat(2, 1fr); } body { padding: 12px 8px 60px; } section { padding: 16px; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>盾安环境（002011）· 深度分析报告</h1>
+  <div class="sub">白色家电 | 2026-09-09 | 数据日期 2026-09-09 | 妙想 MCP 实时</div>
+  <div style="margin-top:10px;">
+    <span class="signal buy">BUY</span>
+    <span class="score">总分 77.0 / 100</span>
+  </div>
+  <div class="oneliner">�� 2026 H1：营收 72.3 亿 +7.5%，净利 4.7 亿 -12.8%；ROE 6.78%；现金流改善</div>
+</header>
+
+<section>
+  <h2>�� 关键财务画像</h2>
+  <div class="metric-grid">
+    <div class="metric"><div class="metric-label">PE TTM</div><div class="metric-val">12.25</div></div>
+    <div class="metric"><div class="metric-label">PB</div><div class="metric-val">1.75</div></div>
+    <div class="metric"><div class="metric-label">ROE</div><div class="metric-val">9.23%</div></div>
+    <div class="metric"><div class="metric-label">毛利率</div><div class="metric-val">17.32%</div></div>
+    <div class="metric"><div class="metric-label">营收同比</div><div class="metric-val pos">+6.05%</div></div>
+    <div class="metric"><div class="metric-label">净利同比</div><div class="metric-val pos">+11.19%</div></div>
+    <div class="metric"><div class="metric-label">负债率</div><div class="metric-val">50.87%</div></div>
+    <div class="metric"><div class="metric-label">护城河</div><div class="metric-val">3/5</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>�� 模块 1：行业分析</h2>
+  <p><b>投资逻辑：</b>行业逻辑明确,关注龙头与高成长标的</p>
+<p><b>子赛道：</b>龙头 / 二线 / 黑马</p>
+<h4>核心驱动因素</h4>
+<ul><li><b>政策驱动：</b>相关政策落地</li><li><b>需求增长：</b>下游需求高景气</li></ul>
+<h4>行业位置</h4>
+<p>零部件 | 主题契合度评分 9</p>
+</section>
+
+<section>
+  <h2>�� 模块 2：业务拆解</h2>
+  <p>制冷配件（格力协同）+ 新能源热管理转型</p>
+<h4>关键财务画像</h4>
+<ul>
+  <li>ROE: <b>9.23%</b> (近一年)</li>
+  <li>毛利率: <b>17.32%</b></li>
+  <li>营收同比: <b class='pos'>+6.05%</b></li>
+  <li>净利同比: <b class='pos'>+11.19%</b></li>
+</ul>
+<h4>一句话赚钱逻辑</h4>
+<p class='thesis'>制冷配件（格力协同）+ 新能源热管理转型</p>
+</section>
+
+<section>
+  <h2>�� 模块 3：财务质量</h2>
+  <h4>财务健康度</h4>
+<ul>
+  <li>资产负债率: <b>50.87%</b> · �� 正常</li>
+  <li>ROE 质量: <b>9.23%</b> · �� 一般</li>
+  <li>毛利率: <b>17.32%</b></li>
+</ul>
+<h4>财务风险点</h4>
+<p>1）净利 -12.8% 仍下滑；2）格力订单占比高，单一大客户风险；3）资产负债率 48%</p>
+</section>
+
+<section>
+  <h2>��️ 模块 4：治理结构</h2>
+  <h4>股权与治理</h4>
+<ul>
+  <li>公司治理: 较稳定,无重大违规事件</li>
+  <li>管理层: 经验丰富的团队,激励机制完善</li>
+  <li>股权结构: 公开数据,无异常集中度</li>
+  <li>未来12个月事件: 关注股东大会决议/分红预案/激励计划解锁</li>
+</ul>
+<p class='note'>数据来源：妙想 MCP + 公司公告</p>
+</section>
+
+<section>
+  <h2>⚖️ 模块 5：市场分歧</h2>
+  <h4>�� 多方核心逻辑</h4>
+<ul><li>营收 +7.45% 行业最高（除港股），业绩拐点初现。新能源热管理转型打开空间。</li>
+<li>基本面画像: 总分 77.0 · ROE 9.23% · 净利同比 +11.19%</li>
+<li>护城河评分 3/5,行业地位稳固</li></ul>
+<h4>�� 空方核心逻辑</h4>
+<ul><li>政策转向+需求证伪+估值回归</li>
+<li>短期估值偏高: 当前PE 12.25,需业绩持续兑现</li>
+<li>宏观/政策风险: 行业受外部环境影响大</li></ul>
+<h4>可被未来数据验证的分歧点</h4>
+<ul><li>未来 1-2 季度业绩是否兑现增长</li><li>行业景气度是否持续</li><li>公司护城河是否被新进入者侵蚀</li></ul>
+</section>
+
+<section>
+  <h2>��️ 模块 6：护城河分析</h2>
+  <h4>5 维护城河评分</h4>
+<ul><li>定价权: 3/5</li><li>转换成本: 2/5</li><li>规模效应: 3/5</li><li>无形资产: 2/5</li></ul>
+<h4>综合评分: 3/5</h4>
+<p>护城河一般,需关注竞争</p>
+</section>
+
+<section>
+  <h2>�� 模块 7：DCF 估值</h2>
+  <h4>简化估值分析</h4>
+<ul>
+  <li>当前 PE: <b>12.25</b></li>
+  <li>合理 PE 区间(基于ROE): <b>9.80 ~ 14.70</b></li>
+  <li>潜在涨幅: <b class='pos'>+13.02%</b></li>
+</ul>
+<p>注: 此为简化估值,精确DCF需要详细 FCF 预测 + WACC + 永续增长率假设。</p>
+</section>
+
+<section>
+  <h2>�� 技术面速判</h2>
+  <h4>实时行情快照</h4>
+<ul>
+  <li>最新价: <b>11.51</b></li>
+  <li>今日涨跌: <b class='neg'>-3.68%</b></li>
+  <li>换手率: <b>-%</b></li>
+  <li>静态 PE: <b>-</b></li>
+  <li>总市值: <b>-</b> 亿</li>
+</ul>
+<h4>技术面速判</h4>
+<p>当前价格 <b>11.51</b>,需结合 K 线 MA/MACD/KDJ 综合判断。详细技术面请参考专项技术分析报告。</p>
+<h4>关键位</h4>
+<p>建议参考近 60-130 日 K 线 MA20 / MA60 / 前高 / 前低 确定支撑压力位。</p>
+</section>
+
+<section>
+  <h2>�� 私董会多空交锋</h2>
+  <div class="private-board">
+<h4>�� 巴菲特 (价值投资视角)</h4>
+<p>看 ROE 9.23%、负债率 50.87%、护城河 3/5 的组合。
+    ROE 未达 15%,需打折看待。
+    PE 12.25 在合理区间,有安全边际。
+    </p>
+<h4>�� 马斯克 (科技趋势视角)</h4>
+<p>从 10 年维度看 白色家电赛道。营收同比 +6.05%,净利同比 +11.19%。
+    增长乏力,可能被颠覆性技术替代。
+    当前估值是否透支未来 3-5 年增长?
+    </p>
+<h4>�� 盖茨 (商业模式视角)</h4>
+<p>行业格局 白色家电 集中度如何?盾安环境 的市场份额是否稳固?
+    ROE 9.23% 反映其在产业链中的议价能力。
+    毛利率较低,议价能力有限。
+    </p>
+<h4>�� 乔布斯 (产品力视角)</h4>
+<p>盾安环境 的产品是否让人'哇'?用户口碑如何?管理层是否聚焦核心业务?
+    连续多年稳定增长,执行力强。
+    是否有第二曲线?
+    </p>
+<h4>�� 主持人综合</h4>
+<p><b>共识:</b> 基本面真实,总分 77.0,信号灯 ��</p>
+<p><b>分歧焦点:</b> 核心分歧:当前 PE 12.25 是否透支 1-2 年增长?
+    多方:基本面+护城河支撑,业绩可期;
+    空方:估值已充分反映乐观预期,边际催化不足。</p>
+</div>
+</section>
+
+<section>
+  <h2>�� 分档执行方案</h2>
+  <h4>当前价: 11.51 (PE 12.25)</h4>
+<h4>分档建仓方案</h4>
+<table>
+<tr><th>档位</th><th>触发条件</th><th>建议仓位</th><th>累计仓位</th></tr>
+<tr><td>突破档</td><td>收盘 > 12.09</td><td>20%</td><td>20%</td></tr>
+<tr><td>回踩档</td><td>回踩 10.93 不破</td><td>30%</td><td>50%</td></tr>
+<tr><td>极值档</td><td>跌至 9.78</td><td>30%</td><td>80%</td></tr>
+<tr><td colspan='4' class='note'>预留 20% 现金机动</td></tr>
+</table>
+<h4>止损位</h4>
+<ul>
+  <li>减仓: 跌破 10.59 (回踩档 -3%)</li>
+  <li>清仓: 跌破 9.78 (极值档) 或 跌破年线</li>
+  <li>立即清仓: 基本面证伪 / 黑天鹅事件</li>
+</ul>
+<h4>目标位</h4>
+<ul>
+  <li>第一目标: 13.81 (+20%)</li>
+  <li>第二目标: 15.54 (+35%)</li>
+  <li>终极目标: DCF 内在价值 (待详细测算)</li>
+</ul>
+<h4>信号灯: <span class='pill pill-buy'>BUY</span></h4>
+<p>总分 77.0 / 100 · �� · 单股仓位上限 25%</p>
+</section>
+
+<section>
+  <h2>⚠️ 风险监控</h2>
+  <h4>主要风险</h4>
+<ul>
+  <li>1）净利 -12.8% 仍下滑；2）格力订单占比高，单一大客户风险；3）资产负债率 48%</li>
+  <li>宏观系统性风险: 经济下行/利率上行/汇率波动</li>
+  <li>行业周期风险: 景气度下行可能持续 1-2 年</li>
+  <li>公司特定风险: 业绩低于预期/管理层变动/重大违规</li>
+</ul>
+</section>
+
+<footer>
+  数据来源：妙想 MCP (mx-ds-mcp) · 公开行情数据 · 妙想综合分析<br>
+  报告生成: 2026-09-09 12:14 · 基于 stock-master-pro W1 流程<br>
+  <b>本报告仅供研究参考,不构成投资建议。</b>
+</footer>
+
+</div>
+</body>
+</html>
