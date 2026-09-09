@@ -12,6 +12,39 @@
   .hero::before { content: "业绩"; position: absolute; font-size: 160px; top: 10px; right: -10px; opacity: 0.14; font-weight: 900; letter-spacing: -8px; }
   .hero h1 { font-size: 30px; color: white; margin-bottom: 6px; font-weight: 800; position: relative; }
   .hero .subtitle { color: rgba(255,255,255,0.95); font-size: 15px; margin-bottom: 16px; position: relative; }
+
+  /* ===== 数据更新工具栏 ===== */
+  .update-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 18px; margin-bottom: 16px; background: linear-gradient(135deg, rgba(15, 23, 42, 0.7), rgba(30, 41, 59, 0.5)); border-radius: 10px; border: 1px solid rgba(148, 163, 184, 0.2); flex-wrap: wrap; }
+  .update-bar-left { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 200px; }
+  .update-label { font-size: 12px; color: #94a3b8; font-weight: 700; padding: 4px 10px; background: rgba(245, 158, 11, 0.15); border-radius: 6px; }
+  .update-status { font-size: 12px; color: #cbd5e1; }
+  .update-status.running { color: #fbbf24; animation: pulse 1.5s ease-in-out infinite; }
+  .update-status.success { color: #10b981; }
+  .update-status.error { color: #f43f5e; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+  .update-bar-right { display: flex; gap: 8px; align-items: center; }
+  .update-btn { background: linear-gradient(135deg, #f59e0b, #ef4444); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3); transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+  .update-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(245, 158, 11, 0.45); }
+  .update-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .update-btn.running { background: linear-gradient(135deg, #3b82f6, #6366f1); animation: pulse-bg 2s ease-in-out infinite; }
+  @keyframes pulse-bg { 0%, 100% { box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4); } 50% { box-shadow: 0 4px 20px rgba(99, 102, 241, 0.7); } }
+  .update-btn.success { background: linear-gradient(135deg, #10b981, #22c55e); }
+  .update-btn-cancel { background: rgba(244, 63, 94, 0.15); color: #f43f5e; border: 1px solid rgba(244, 63, 94, 0.4); padding: 9px 14px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .update-btn-cancel:hover { background: rgba(244, 63, 94, 0.25); }
+  .update-btn-refresh { background: rgba(99, 102, 241, 0.15); color: #a5b4fc; border: 1px solid rgba(99, 102, 241, 0.4); padding: 9px 14px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .update-btn-refresh:hover { background: rgba(99, 102, 241, 0.25); }
+
+  /* ===== 更新日志面板 ===== */
+  .update-log-panel { margin-bottom: 16px; padding: 14px; background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 10px; }
+  .log-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid rgba(148, 163, 184, 0.2); font-size: 13px; color: #10b981; font-weight: 700; }
+  .log-close { background: rgba(148, 163, 184, 0.1); color: #94a3b8; border: 1px solid rgba(148, 163, 184, 0.3); padding: 4px 10px; border-radius: 5px; font-size: 11px; cursor: pointer; }
+  .log-close:hover { background: rgba(148, 163, 184, 0.2); color: #e2e8f0; }
+  .log-content { background: #000; color: #10b981; padding: 12px; border-radius: 6px; font-family: 'Cascadia Code', 'Consolas', 'Courier New', monospace; font-size: 11px; line-height: 1.6; max-height: 400px; overflow-y: auto; white-space: pre-wrap; word-break: break-all; }
+  .log-content .log-line { padding: 1px 0; }
+  .log-content .log-error { color: #f43f5e; font-weight: 700; }
+  .log-content .log-success { color: #10b981; font-weight: 700; }
+  .log-content .log-warn { color: #fbbf24; }
+  .log-content .log-step { color: #a5b4fc; font-weight: 700; margin-top: 6px; }
   .meta-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; position: relative; }
   .meta-card { background: rgba(255,255,255,0.12); backdrop-filter: blur(10px); border-radius: 8px; padding: 10px; }
   .meta-card .label { font-size: 10px; color: rgba(255,255,255,0.8); }
@@ -232,6 +265,31 @@
     <div class="meta-card"><div class="label">报告期</div><div class="value">2026-09-09</div></div>
     <div class="meta-card"><div class="label">行情快照</div><div class="value">2026-09-09</div><div class="sub">妙想实时</div></div>
     <div class="meta-card"><div class="label">全场 TOP1</div><div class="value">88.0</div><div class="sub">新洋丰</div></div>
+  </div>
+</div>
+
+<div class="update-bar">
+  <div class="update-bar-left">
+    <span class="update-label">📡 数据更新</span>
+    <span class="update-status" id="updateStatus">⏺️ 空闲中 · 上次更新 <span id="lastUpdateTime">2026-09-09</span></span>
+  </div>
+  <div class="update-bar-right">
+    <button class="update-btn" id="updateBtn" onclick="triggerUpdate()">
+      <span class="btn-icon" id="btnIcon">🚀</span>
+      <span class="btn-text" id="btnText">每日自动更新</span>
+    </button>
+    <button class="update-btn-cancel" id="cancelBtn" onclick="cancelUpdate()" style="display:none;">⛔ 取消</button>
+    <button class="update-btn-refresh" onclick="location.reload()">🔄 刷新页面</button>
+  </div>
+</div>
+
+<div class="update-log-panel" id="updateLogPanel" style="display:none;">
+  <div class="log-header">
+    <span>📋 实时日志</span>
+    <button class="log-close" onclick="toggleLogPanel()">收起 ⬆</button>
+  </div>
+  <div class="log-content" id="logContent">
+    <div style="color:#64748b; text-align:center; padding:20px;">等待启动...</div>
   </div>
 </div>
 
@@ -12521,13 +12579,182 @@ function switchTab(idx) {
   document.querySelectorAll('.tab-btn')[idx].classList.add('active');
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
+
+// ===== 每日更新按钮 =====
+const UPDATE_API = 'http://127.0.0.1:8721/api';
+let updatePollTimer = null;
+let lastLogLineCount = 0;
+
+function setBtnState(state, label) {
+  const btn = document.getElementById('updateBtn');
+  const icon = document.getElementById('btnIcon');
+  const text = document.getElementById('btnText');
+  const cancel = document.getElementById('cancelBtn');
+  btn.classList.remove('running', 'success');
+  if (state === 'running') {
+    btn.classList.add('running');
+    btn.disabled = true;
+    icon.textContent = '⏳';
+    text.textContent = label || '更新中...';
+    cancel.style.display = 'inline-flex';
+  } else if (state === 'success') {
+    btn.classList.add('success');
+    btn.disabled = false;
+    icon.textContent = '✅';
+    text.textContent = label || '更新完成';
+    cancel.style.display = 'none';
+  } else if (state === 'error') {
+    btn.disabled = false;
+    icon.textContent = '❌';
+    text.textContent = label || '更新失败';
+    cancel.style.display = 'none';
+  } else {
+    btn.disabled = false;
+    icon.textContent = '🚀';
+    text.textContent = label || '每日自动更新';
+    cancel.style.display = 'none';
+  }
+}
+
+function setStatus(text, cls) {
+  const el = document.getElementById('updateStatus');
+  el.className = 'update-status' + (cls ? ' ' + cls : '');
+  el.innerHTML = text;
+}
+
+function toggleLogPanel(show) {
+  const panel = document.getElementById('updateLogPanel');
+  if (show === undefined) {
+    panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+  } else {
+    panel.style.display = show ? 'block' : 'none';
+  }
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function renderLog(lines) {
+  const el = document.getElementById('logContent');
+  if (!lines || lines.length === 0) {
+    el.innerHTML = '<div style="color:#64748b; text-align:center; padding:20px;">(暂无日志)</div>';
+    return;
+  }
+  const html = lines.map(line => {
+    let cls = 'log-line';
+    if (/\[ERROR\]/.test(line) || /❌/.test(line) || /FAILED/.test(line)) cls += ' log-error';
+    else if (/\[SUCCESS\]/.test(line) || /✅/.test(line) || /🎉/.test(line)) cls += ' log-success';
+    else if (/\[WARN\]/.test(line) || /⚠/.test(line)) cls += ' log-warn';
+    else if (/步骤 \d+\/\d+/.test(line) || /==/.test(line)) cls += ' log-step';
+    return `<div class="${cls}">${escapeHtml(line)}</div>`;
+  }).join('');
+  el.innerHTML = html;
+  // 滚到底部
+  el.scrollTop = el.scrollHeight;
+}
+
+async function pollStatus() {
+  try {
+    const resp = await fetch(UPDATE_API + '/status');
+    const data = await resp.json();
+    if (data.running) {
+      setBtnState('running');
+      setStatus(`🔄 更新中 · PID ${data.pid} · 已运行 ${formatElapsed(data.started_at)}`, 'running');
+      // 增量渲染日志
+      const lines = data.recent_log || [];
+      if (lines.length !== lastLogLineCount) {
+        renderLog(lines);
+        lastLogLineCount = lines.length;
+      }
+    } else {
+      // 已结束
+      if (updatePollTimer) {
+        clearInterval(updatePollTimer);
+        updatePollTimer = null;
+      }
+      const lines = data.recent_log || [];
+      renderLog(lines);
+      // 判断是否成功
+      const lastLines = lines.slice(-5).join('\n');
+      const isSuccess = /🎉.*完成/.test(lastLines) || /推送完成/.test(lastLines);
+      const isError = /❌|FAILED|出错/.test(lastLines) && !isSuccess;
+      if (isSuccess) {
+        setBtnState('success', '✅ 已更新 · 点击刷新页面');
+        setStatus(`🎉 上次更新成功 · ${data.started_at || ''}`, 'success');
+      } else if (isError) {
+        setBtnState('error', '❌ 更新失败 · 查看日志');
+        setStatus(`❌ 上次更新出错 · 查看下方日志`, 'error');
+      } else {
+        setBtnState('idle', '🚀 每日自动更新');
+        setStatus(`⏺️ 空闲中 · 上次更新 ${data.started_at || '未知'}`);
+      }
+    }
+  } catch (e) {
+    setStatus('⚠️ 无法连接本地更新服务 (端口 8721)', 'error');
+  }
+}
+
+function formatElapsed(startedAt) {
+  if (!startedAt) return '?';
+  try {
+    const start = new Date(startedAt).getTime();
+    const now = Date.now();
+    const sec = Math.floor((now - start) / 1000);
+    if (sec < 60) return sec + ' 秒';
+    if (sec < 3600) return Math.floor(sec / 60) + ' 分 ' + (sec % 60) + ' 秒';
+    return Math.floor(sec / 3600) + ' 时 ' + Math.floor((sec % 3600) / 60) + ' 分';
+  } catch (e) { return '?'; }
+}
+
+async function triggerUpdate() {
+  setBtnState('running', '启动中...');
+  setStatus('🚀 正在启动更新进程...', 'running');
+  toggleLogPanel(true);
+  renderLog(['[启动] 请求本地 API: POST /api/update ...']);
+  try {
+    const resp = await fetch(UPDATE_API + '/update', { method: 'POST' });
+    const data = await resp.json();
+    if (!data.ok) {
+      setBtnState('error', data.msg || '启动失败');
+      setStatus('❌ ' + (data.msg || '启动失败'), 'error');
+      return;
+    }
+    setStatus(`🔄 已启动 · PID ${data.pid} · 轮询日志中...`, 'running');
+    if (updatePollTimer) clearInterval(updatePollTimer);
+    updatePollTimer = setInterval(pollStatus, 1500);
+    pollStatus();
+  } catch (e) {
+    setBtnState('error', '无法连接 API');
+    setStatus('❌ 无法连接本地 API 服务 (127.0.0.1:8721)', 'error');
+    renderLog(['[ERROR] ' + e.message, '请确认 update_api_server.py 已后台运行：', '  pythonw.exe update_api_server.py']);
+  }
+}
+
+async function cancelUpdate() {
+  if (!confirm('确定要取消当前更新任务吗？')) return;
+  try {
+    const resp = await fetch(UPDATE_API + '/cancel', { method: 'POST' });
+    const data = await resp.json();
+    setStatus('⛔ ' + (data.msg || '已请求取消'), 'error');
+  } catch (e) {
+    setStatus('❌ 取消失败: ' + e.message, 'error');
+  }
+}
+
+// 页面加载时检查是否有正在运行的任务
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('tab-0').classList.add('active');
+  // 静默检查状态
+  pollStatus();
+});
 function toggleDetail(code, event) {
   event.stopPropagation();
   const panel = document.getElementById('detail-' + code);
   if (panel.style.display === 'none') { panel.style.display = 'block'; setTimeout(() => panel.scrollIntoView({behavior: 'smooth', block: 'nearest'}), 100); }
   else { panel.style.display = 'none'; }
 }
-document.addEventListener('DOMContentLoaded', () => { document.getElementById('tab-0').classList.add('active'); });
+// (旧的 DOMContentLoaded 监听器已合并到上面的"每日更新按钮"区域)
 
 // ===== 全部股票：搜索 + 排序 =====
 let allStocksCurrentSort = { field: 'total', asc: false };
