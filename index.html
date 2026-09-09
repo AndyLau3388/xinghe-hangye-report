@@ -332,7 +332,7 @@
 <section>
   <h2>📊 我的投资组合</h2>
   
-    <div class="portfolio-dashboard">
+    <div class="portfolio-dashboard" id="portfolioDashboard">
       <div class="pd-card"><div class="pd-label">💰 总投入</div><div class="pd-value">¥17,104.00</div></div>
       <div class="pd-card"><div class="pd-label">📊 当前市值</div><div class="pd-value">¥17,032.00</div></div>
       <div class="pd-card pd-pnl" style="border-color:#f43f5e40;">
@@ -346,7 +346,7 @@
 </section>
 <section>
   <h2>📌 当前持仓 <span class="rating-count">1 只</span></h2>
-  <div class="pos-grid">
+  <div class="pos-grid" id="posGrid">
             <div class="pos-card" style="border-color:#f43f5e30;">
               <div class="pos-name">海尔智家 <span class="pos-code">600690</span></div>
               <div class="pos-shares">800 <span style="font-size:12px;color:#64748b;">股</span></div>
@@ -386,7 +386,7 @@
 <section>
   <h2>📋 交易流水 <span class="rating-count">10 笔</span></h2>
   
-        <div class="table-wrap">
+        <div class="table-wrap" id="tradeTableWrap">
           <table class="trade-table">
             <thead><tr><th>日期</th><th>股票</th><th>方向</th><th>价格</th><th>数量</th><th>金额</th><th>备注</th></tr></thead>
             <tbody>
@@ -12970,6 +12970,8 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('tab-0').classList.add('active');
   // 静默检查状态
   pollStatus();
+  // 动态加载最新交易数据（本地模式）
+  loadTrades();
 });
 function toggleDetail(code, event) {
   event.stopPropagation();
@@ -13083,6 +13085,90 @@ function filterAllStocks() {
   if (totalEl) totalEl.textContent = visibleCount;
 }
 
+// ===== 我的交易：动态加载 =====
+function loadTrades() {
+  if (IS_HTTPS) return; // 在线模式不加载
+  fetch(UPDATE_API + '/trades')
+    .then(r => r.json())
+    .then(data => {
+      const s = data.summary || {};
+      const positions = data.positions || [];
+      const trades = data.trades || [];
+
+      // 1. 更新仪表盘
+      const dash = document.getElementById('portfolioDashboard');
+      if (dash) {
+        const tc = s.total_cost || 0;
+        const tv = s.total_value || 0;
+        const tp = s.total_pnl || 0;
+        const tpct = s.total_pnl_pct || 0;
+        const pc = tp >= 0 ? '#10b981' : '#f43f5e';
+        const pi = tp >= 0 ? '📈' : '📉';
+        dash.innerHTML =
+          '<div class="pd-card"><div class="pd-label">💰 总投入</div><div class="pd-value">¥' + tc.toLocaleString('zh-CN',{minimumFractionDigits:2}) + '</div></div>' +
+          '<div class="pd-card"><div class="pd-label">📊 当前市值</div><div class="pd-value">¥' + tv.toLocaleString('zh-CN',{minimumFractionDigits:2}) + '</div></div>' +
+          '<div class="pd-card pd-pnl" style="border-color:' + pc + '40;">' +
+            '<div class="pd-label">' + pi + ' 浮动盈亏</div>' +
+            '<div class="pd-value" style="color:' + pc + ';">¥' + tp.toLocaleString('zh-CN',{minimumFractionDigits:2}) + '</div>' +
+            '<div class="pd-sub" style="color:' + pc + ';">' + (tpct >= 0 ? '+' : '') + tpct.toFixed(2) + '%</div>' +
+          '</div>' +
+          '<div class="pd-card"><div class="pd-label">📦 持仓数量</div><div class="pd-value">' + positions.length + ' 只</div></div>' +
+          '<div class="pd-card"><div class="pd-label">🧾 累计交易</div><div class="pd-value">' + trades.length + ' 笔</div></div>';
+      }
+
+      // 2. 更新持仓卡片
+      const posGrid = document.getElementById('posGrid');
+      if (posGrid) {
+        if (positions.length > 0) {
+          let html = '';
+          for (const p of positions) {
+            const pc2 = p.pnl >= 0 ? '#10b981' : '#f43f5e';
+            const pi2 = p.pnl >= 0 ? '📈' : '📉';
+            html += '<div class="pos-card" style="border-color:' + pc2 + '30;">' +
+              '<div class="pos-name">' + escapeHtml(p.name) + ' <span class="pos-code">' + p.code + '</span></div>' +
+              '<div class="pos-shares">' + p.shares.toLocaleString() + ' <span style="font-size:12px;color:#64748b;">股</span></div>' +
+              '<div class="pos-row"><span>买入均价</span><b>' + p.avg_cost.toFixed(4) + '</b></div>' +
+              '<div class="pos-row"><span>最新价</span><b>' + p.current_price.toFixed(4) + '</b></div>' +
+              '<div class="pos-row"><span>成本</span><b>¥' + p.cost_amount.toLocaleString('zh-CN',{minimumFractionDigits:2}) + '</b></div>' +
+              '<div class="pos-row"><span>市值</span><b>¥' + p.current_value.toLocaleString('zh-CN',{minimumFractionDigits:2}) + '</b></div>' +
+              '<div class="pos-pnl" style="color:' + pc2 + ';">' + pi2 + ' ' + (p.pnl >= 0 ? '+' : '') + p.pnl.toLocaleString('zh-CN',{minimumFractionDigits:2}) + ' (' + (p.pnl_pct >= 0 ? '+' : '') + p.pnl_pct.toFixed(2) + '%)</div>' +
+            '</div>';
+          }
+          posGrid.innerHTML = html;
+        } else {
+          posGrid.innerHTML = '<div class="trade-empty">当前没有持仓 —— 在下面录一笔买入开始你的投资之旅 📈</div>';
+        }
+      }
+
+      // 3. 更新交易流水表
+      const twrap = document.getElementById('tradeTableWrap');
+      if (twrap) {
+        if (trades.length > 0) {
+          let rows = '';
+          for (const r of trades) {
+            const color = r.side === 'Buy' || r.side === 'BUY' ? '#10b981' : '#f43f5e';
+            const label = r.side === 'Buy' || r.side === 'BUY' ? '买入' : '卖出';
+            const note = r.notes ? '<span class="trade-note">' + escapeHtml(r.notes) + '</span>' : '';
+            rows += '<tr><td>' + r.trade_date + '</td>' +
+              '<td class="td-name">' + escapeHtml(r.name) + '<span class="td-code">' + r.code + '</span></td>' +
+              '<td><span class="side-badge" style="color:' + color + ';background:' + color + '1f;">' + label + '</span></td>' +
+              '<td class="td-r">' + (r.price ? Number(r.price).toFixed(4) : '-') + '</td>' +
+              '<td class="td-r">' + Number(r.shares).toLocaleString() + '</td>' +
+              '<td class="td-r">¥' + Number(r.amount).toLocaleString('zh-CN',{minimumFractionDigits:2}) + '</td>' +
+              '<td>' + note + '</td></tr>';
+          }
+          twrap.outerHTML = '<div class="table-wrap" id="tradeTableWrap"><table class="trade-table">' +
+            '<thead><tr><th>日期</th><th>股票</th><th>方向</th><th>价格</th><th>数量</th><th>金额</th><th>备注</th></tr></thead>' +
+            '<tbody>' + rows + '</tbody></table></div>';
+        }
+      }
+    })
+    .catch(function(e) {
+      // 静默失败 - 烘焙的静态数据仍然可用
+      console.log('[loadTrades] API不可用，使用静态数据');
+    });
+}
+
 // ===== 我的交易：录入 =====
 function submitTrade() {
   const msg = document.getElementById('tradeMsg');
@@ -13110,8 +13196,11 @@ function submitTrade() {
   }).then(r => r.json()).then(res => {
     if (res.ok) {
       msg.className = 'trade-form-msg ok';
-      msg.textContent = '✅ 已保存，正在刷新...';
-      setTimeout(function() { location.reload(); }, 800);
+      msg.textContent = '✅ 已保存，正在刷新数据...';
+      // 清空表单
+      document.getElementById('tradeForm').reset();
+      // 动态刷新交易数据，不再整页 reload
+      setTimeout(loadTrades, 300);
     } else {
       msg.className = 'trade-form-msg err';
       msg.textContent = '『' + (res.msg || '保存失败') + '』';
