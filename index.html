@@ -12774,6 +12774,8 @@ function switchTab(idx) {
 const UPDATE_API = 'http://127.0.0.1:8721/api';
 let updatePollTimer = null;
 let lastLogLineCount = 0;
+const IS_HTTPS = location.protocol === 'https:';
+const IS_LOCAL_FILE = location.protocol === 'file:';
 
 function setBtnState(state, label) {
   const btn = document.getElementById('updateBtn');
@@ -12881,7 +12883,15 @@ async function pollStatus() {
       }
     }
   } catch (e) {
-    setStatus('⚠️ 无法连接本地更新服务 (端口 8721)', 'error');
+    if (IS_HTTPS) {
+      setBtnState('idle');
+      const btn = document.getElementById('updateBtn');
+      btn.disabled = true;
+      btn.title = '在线模式下不可用，请在本地打开 index.html';
+      setStatus('📡 在线模式 · <a href="javascript:void(0)" onclick="location.href=location.href.replace('https://','http://')" style="color:#3b82f6">点击切换到本地 HTTP</a> 或在本地双击打开 index.html 使用更新功能', 'error');
+    } else {
+      setStatus('⚠️ 无法连接本地更新服务 (端口 8721) · 请确认 update_api_server.py 已运行', 'error');
+    }
   }
 }
 
@@ -12898,6 +12908,21 @@ function formatElapsed(startedAt) {
 }
 
 async function triggerUpdate() {
+  if (IS_HTTPS) {
+    setBtnState('error', '需本地打开');
+    setStatus('❌ 在线模式下无法更新 · 请在本地双击打开 index.html 文件后使用此功能', 'error');
+    toggleLogPanel(true);
+    renderLog([
+      '[INFO] 当前页面来自 HTTPS (GitHub Pages)',
+      '浏览器安全策略阻止了到本地 HTTP 服务的请求。',
+      '',
+      '解决方法：',
+      '1. 在本地双击打开 e:\星河湾公司资料\03.智能化项目\08.Trae Solo应用\15.深度股票分析筛选\index.html',
+      '2. 确认 update_api_server.py 已后台运行 (端口 8721)',
+      '3. 然后点击「每日自动更新」按钮即可'
+    ]);
+    return;
+  }
   setBtnState('running', '启动中...');
   setStatus('🚀 正在启动更新进程...', 'running');
   toggleLogPanel(true);
@@ -12916,8 +12941,16 @@ async function triggerUpdate() {
     pollStatus();
   } catch (e) {
     setBtnState('error', '无法连接 API');
-    setStatus('❌ 无法连接本地 API 服务 (127.0.0.1:8721)', 'error');
-    renderLog(['[ERROR] ' + e.message, '请确认 update_api_server.py 已后台运行：', '  pythonw.exe update_api_server.py']);
+    setStatus('❌ 无法连接本地 API 服务 (127.0.0.1:8721) · 请确认 update_api_server.py 已运行', 'error');
+    renderLog([
+      '[ERROR] ' + e.message,
+      '',
+      '请确认 update_api_server.py 已后台运行：',
+      '  方法1: 命令行执行  pythonw.exe update_api_server.py',
+      '  方法2: 设置开机自启 (建议)',
+      '',
+      '如当前页面来自 GitHub Pages (HTTPS)，请改为本地打开 index.html'
+    ]);
   }
 }
 
