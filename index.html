@@ -192,6 +192,39 @@
   #allStocksBody tr { transition: background 0.15s; }
   #allStocksBody tr:hover { background: rgba(245, 158, 11, 0.06); }
 
+  /* ===== 我的交易 Tab（投资组合仪表盘） ===== */
+  .tab-btn-trade { background: linear-gradient(135deg, rgba(236, 72, 153, 0.25), rgba(245, 158, 11, 0.18)); color: #f9a8d4; border-color: rgba(236, 72, 153, 0.4); font-weight: 700; }
+  .tab-btn-trade.active { background: linear-gradient(135deg, rgba(236, 72, 153, 0.5), rgba(245, 158, 11, 0.35)); color: #fbcfe8; }
+  .portfolio-dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-top: 12px; }
+  .pd-card { background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.6)); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 12px; padding: 14px 16px; text-align: center; }
+  .pd-label { font-size: 11px; color: #94a3b8; font-weight: 600; margin-bottom: 4px; }
+  .pd-value { font-size: 20px; font-weight: 800; color: #f8fafc; }
+  .pd-sub { font-size: 13px; font-weight: 700; margin-top: 2px; }
+  .pd-pnl { border-width: 2px; }
+  .pos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin-top: 12px; }
+  .pos-card { background: linear-gradient(135deg, rgba(15, 23, 42, 0.7), rgba(30, 41, 59, 0.5)); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 12px; padding: 14px 16px; }
+  .pos-name { font-size: 14px; font-weight: 700; color: #f8fafc; display: flex; align-items: baseline; gap: 8px; }
+  .pos-code { font-size: 11px; color: #94a3b8; font-weight: 500; }
+  .pos-shares { font-size: 24px; font-weight: 800; color: #f9a8d4; margin: 6px 0 10px; }
+  .pos-row { display: flex; justify-content: space-between; font-size: 12px; color: #94a3b8; padding: 2px 0; }
+  .pos-row b { color: #e2e8f0; }
+  .pos-pnl { margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(148, 163, 184, 0.15); font-size: 14px; font-weight: 800; text-align: center; }
+  .trade-empty { background: rgba(15, 23, 42, 0.5); border: 1px dashed rgba(148, 163, 184, 0.3); border-radius: 10px; padding: 24px 18px; text-align: center; color: #94a3b8; font-size: 13px; margin-top: 12px; }
+  .trade-form { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(148, 163, 184, 0.15); border-radius: 12px; padding: 16px; margin-top: 12px; }
+  .tf-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  .tf-row label { display: flex; flex-direction: column; font-size: 11px; color: #94a3b8; gap: 4px; flex: 1; min-width: 130px; }
+  .tf-row input, .tf-row select { background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(148, 163, 184, 0.25); border-radius: 6px; padding: 8px 10px; color: #e2e8f0; font-size: 13px; outline: none; }
+  .tf-row input:focus, .tf-row select:focus { border-color: #ec4899; box-shadow: 0 0 0 2px rgba(236, 72, 153, 0.2); }
+  .tf-actions { display: flex; align-items: center; gap: 12px; }
+  .trade-form-msg { font-size: 12px; }
+  .trade-form-msg.ok { color: #10b981; }
+  .trade-form-msg.err { color: #f43f5e; }
+  .trade-table .td-name { font-weight: 600; }
+  .trade-table .td-code { display: block; font-size: 10px; color: #94a3b8; font-weight: 400; }
+  .trade-table .td-r { text-align: right; color: #f8fafc; }
+  .side-badge { display: inline-block; padding: 1px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; }
+  .trade-note { font-size: 11px; color: #94a3b8; }
+
   /* ===== 响应式：平板 (1024px) ===== */
   @media (max-width: 1024px) {
     .container { max-width: 100%; }
@@ -293,9 +326,166 @@
   </div>
 </div>
 
-<div class="tab-nav"><button class="tab-btn tab-btn-all active" onclick="switchTab(0)" title="全部股票总览 · 支持搜索排序">🌟 全部股票</button><button class="tab-btn" onclick="switchTab(1)" title="所有 105 只股票当天建议买入/止损/目标价区间 · 妙想 MCP 实时数据 2026-09-08">💰 价格区间</button><button class="tab-btn" onclick="switchTab(2)" title="农业补种与农资 (4只)" data-full="农业补种与农资">农业 <span class="tab-count">4</span></button><button class="tab-btn" onclick="switchTab(3)" title="AI 应用 (7只)" data-full="AI 应用">AI 应用 <span class="tab-count">7</span></button><button class="tab-btn" onclick="switchTab(4)" title="啤酒与饮料 (4只)" data-full="啤酒与饮料">啤酒饮料 <span class="tab-count">4</span></button><button class="tab-btn" onclick="switchTab(5)" title="生物医药 (1只)" data-full="生物医药">生物 <span class="tab-count">1</span></button><button class="tab-btn" onclick="switchTab(6)" title="冷链物流 (3只)" data-full="冷链物流">冷链 <span class="tab-count">3</span></button><button class="tab-btn" onclick="switchTab(7)" title="干旱地区灌溉与节水 (4只)" data-full="干旱地区灌溉与节水">节水灌溉 <span class="tab-count">4</span></button><button class="tab-btn" onclick="switchTab(8)" title="应急药品与消杀 (5只)" data-full="应急药品与消杀">应急药品 <span class="tab-count">5</span></button><button class="tab-btn" onclick="switchTab(9)" title="应急食品与饮用水 (4只)" data-full="应急食品与饮用水">应急食品 <span class="tab-count">4</span></button><button class="tab-btn" onclick="switchTab(10)" title="应急电源与照明 (5只)" data-full="应急电源与照明">应急电源 <span class="tab-count">5</span></button><button class="tab-btn" onclick="switchTab(11)" title="防水排涝应急工具 (5只)" data-full="防水排涝应急工具">防水排涝 <span class="tab-count">5</span></button><button class="tab-btn" onclick="switchTab(12)" title="环境治理与消毒防疫 (6只)" data-full="环境治理与消毒防疫">环境治理 <span class="tab-count">6</span></button><button class="tab-btn" onclick="switchTab(13)" title="电力设施抢修与配网升级 (6只)" data-full="电力设施抢修与配网升级">电网修复 <span class="tab-count">6</span></button><button class="tab-btn" onclick="switchTab(14)" title="白色家电 (11只)" data-full="白色家电">白色家电 <span class="tab-count">11</span></button><button class="tab-btn" onclick="switchTab(15)" title="农业保险 (3只)" data-full="农业保险">农业保险 <span class="tab-count">3</span></button><button class="tab-btn" onclick="switchTab(16)" title="工程机械与灾后重建 (8只)" data-full="工程机械与灾后重建">机械重建 <span class="tab-count">8</span></button><button class="tab-btn" onclick="switchTab(17)" title="新能源 (2只)" data-full="新能源">新能源 <span class="tab-count">2</span></button><button class="tab-btn" onclick="switchTab(18)" title="核电重启 (6只)" data-full="核电重启">核电 <span class="tab-count">6</span></button><button class="tab-btn" onclick="switchTab(19)" title="防暑降温及肠道药品 (2只)" data-full="防暑降温及肠道药品">防暑 <span class="tab-count">2</span></button><button class="tab-btn" onclick="switchTab(20)" title="电网设备与火电 (3只)" data-full="电网设备与火电">电网火电 <span class="tab-count">3</span></button><button class="tab-btn" onclick="switchTab(21)" title="制冷剂/氟化工 (4只)" data-full="制冷剂/氟化工">制冷剂 <span class="tab-count">4</span></button><button class="tab-btn" onclick="switchTab(22)" title="种业 (4只)" data-full="种业">种业 <span class="tab-count">4</span></button><button class="tab-btn" onclick="switchTab(23)" title="半导体 (1只)" data-full="半导体">半导体 <span class="tab-count">1</span></button><button class="tab-btn" onclick="switchTab(24)" title="软件开发 (1只)" data-full="软件开发">软件 <span class="tab-count">1</span></button><button class="tab-btn" onclick="switchTab(25)" title="水利设施修复与排涝 (7只)" data-full="水利设施修复与排涝">水利 <span class="tab-count">7</span></button></div>
+<div class="tab-nav"><button class="tab-btn tab-btn-trade active" onclick="switchTab(0)" title="我的投资组合 · 持仓盈亏 · 交易流水">📊 我的交易</button><button class="tab-btn tab-btn-all" onclick="switchTab(1)" title="全部股票总览 · 支持搜索排序">🌟 全部股票</button><button class="tab-btn" onclick="switchTab(2)" title="所有 105 只股票当天建议买入/止损/目标价区间 · 妙想 MCP 实时数据 2026-09-08">💰 价格区间</button><button class="tab-btn" onclick="switchTab(3)" title="农业补种与农资 (4只)" data-full="农业补种与农资">农业 <span class="tab-count">4</span></button><button class="tab-btn" onclick="switchTab(4)" title="AI 应用 (7只)" data-full="AI 应用">AI 应用 <span class="tab-count">7</span></button><button class="tab-btn" onclick="switchTab(5)" title="啤酒与饮料 (4只)" data-full="啤酒与饮料">啤酒饮料 <span class="tab-count">4</span></button><button class="tab-btn" onclick="switchTab(6)" title="生物医药 (1只)" data-full="生物医药">生物 <span class="tab-count">1</span></button><button class="tab-btn" onclick="switchTab(7)" title="冷链物流 (3只)" data-full="冷链物流">冷链 <span class="tab-count">3</span></button><button class="tab-btn" onclick="switchTab(8)" title="干旱地区灌溉与节水 (4只)" data-full="干旱地区灌溉与节水">节水灌溉 <span class="tab-count">4</span></button><button class="tab-btn" onclick="switchTab(9)" title="应急药品与消杀 (5只)" data-full="应急药品与消杀">应急药品 <span class="tab-count">5</span></button><button class="tab-btn" onclick="switchTab(10)" title="应急食品与饮用水 (4只)" data-full="应急食品与饮用水">应急食品 <span class="tab-count">4</span></button><button class="tab-btn" onclick="switchTab(11)" title="应急电源与照明 (5只)" data-full="应急电源与照明">应急电源 <span class="tab-count">5</span></button><button class="tab-btn" onclick="switchTab(12)" title="防水排涝应急工具 (5只)" data-full="防水排涝应急工具">防水排涝 <span class="tab-count">5</span></button><button class="tab-btn" onclick="switchTab(13)" title="环境治理与消毒防疫 (6只)" data-full="环境治理与消毒防疫">环境治理 <span class="tab-count">6</span></button><button class="tab-btn" onclick="switchTab(14)" title="电力设施抢修与配网升级 (6只)" data-full="电力设施抢修与配网升级">电网修复 <span class="tab-count">6</span></button><button class="tab-btn" onclick="switchTab(15)" title="白色家电 (11只)" data-full="白色家电">白色家电 <span class="tab-count">11</span></button><button class="tab-btn" onclick="switchTab(16)" title="农业保险 (3只)" data-full="农业保险">农业保险 <span class="tab-count">3</span></button><button class="tab-btn" onclick="switchTab(17)" title="工程机械与灾后重建 (8只)" data-full="工程机械与灾后重建">机械重建 <span class="tab-count">8</span></button><button class="tab-btn" onclick="switchTab(18)" title="新能源 (2只)" data-full="新能源">新能源 <span class="tab-count">2</span></button><button class="tab-btn" onclick="switchTab(19)" title="核电重启 (6只)" data-full="核电重启">核电 <span class="tab-count">6</span></button><button class="tab-btn" onclick="switchTab(20)" title="防暑降温及肠道药品 (2只)" data-full="防暑降温及肠道药品">防暑 <span class="tab-count">2</span></button><button class="tab-btn" onclick="switchTab(21)" title="电网设备与火电 (3只)" data-full="电网设备与火电">电网火电 <span class="tab-count">3</span></button><button class="tab-btn" onclick="switchTab(22)" title="制冷剂/氟化工 (4只)" data-full="制冷剂/氟化工">制冷剂 <span class="tab-count">4</span></button><button class="tab-btn" onclick="switchTab(23)" title="种业 (4只)" data-full="种业">种业 <span class="tab-count">4</span></button><button class="tab-btn" onclick="switchTab(24)" title="半导体 (1只)" data-full="半导体">半导体 <span class="tab-count">1</span></button><button class="tab-btn" onclick="switchTab(25)" title="软件开发 (1只)" data-full="软件开发">软件 <span class="tab-count">1</span></button><button class="tab-btn" onclick="switchTab(26)" title="水利设施修复与排涝 (7只)" data-full="水利设施修复与排涝">水利 <span class="tab-count">7</span></button></div>
 
-<div class="tab-pane" id="tab-0">
+<div class="tab-pane active" id="tab-0">
+<section>
+  <h2>📊 我的投资组合</h2>
+  
+    <div class="portfolio-dashboard">
+      <div class="pd-card"><div class="pd-label">💰 总投入</div><div class="pd-value">¥17,104.00</div></div>
+      <div class="pd-card"><div class="pd-label">📊 当前市值</div><div class="pd-value">¥17,032.00</div></div>
+      <div class="pd-card pd-pnl" style="border-color:#f43f5e40;">
+        <div class="pd-label">📉 浮动盈亏</div>
+        <div class="pd-value" style="color:#f43f5e;">¥-72.00</div>
+        <div class="pd-sub" style="color:#f43f5e;">-0.42%</div>
+      </div>
+      <div class="pd-card"><div class="pd-label">📦 持仓数量</div><div class="pd-value">1 只</div></div>
+      <div class="pd-card"><div class="pd-label">🧾 累计交易</div><div class="pd-value">10 笔</div></div>
+    </div>
+</section>
+<section>
+  <h2>📌 当前持仓 <span class="rating-count">1 只</span></h2>
+  <div class="pos-grid">
+            <div class="pos-card" style="border-color:#f43f5e30;">
+              <div class="pos-name">海尔智家 <span class="pos-code">600690</span></div>
+              <div class="pos-shares">800 <span style="font-size:12px;color:#64748b;">股</span></div>
+              <div class="pos-row"><span>买入均价</span><b>21.3800</b></div>
+              <div class="pos-row"><span>最新价</span><b>21.2900</b></div>
+              <div class="pos-row"><span>成本</span><b>¥17,104.00</b></div>
+              <div class="pos-row"><span>市值</span><b>¥17,032.00</b></div>
+              <div class="pos-pnl" style="color:#f43f5e;">📉 -72.00 (-0.42%)</div>
+            </div></div>
+</section>
+<section>
+  <h2>🧾 加一笔交易</h2>
+  <form class="trade-form" id="tradeForm">
+    <div class="tf-row">
+      <label>日期<input type="date" id="t_date" required></label>
+      <label>代码<input type="text" id="t_code" placeholder="600690" required></label>
+      <label>名称<input type="text" id="t_name" placeholder="海尔智家" required></label>
+      <label>方向
+        <select id="t_side">
+          <option value="BUY">买入</option>
+          <option value="SELL">卖出</option>
+        </select>
+      </label>
+    </div>
+    <div class="tf-row">
+      <label>价格<input type="number" id="t_price" step="0.001" min="0" placeholder="21.38" required></label>
+      <label>数量<input type="number" id="t_shares" step="1" min="0" placeholder="800" required></label>
+      <label>金额<input type="number" id="t_amount" step="0.01" min="0" placeholder="留空自动算" ></label>
+      <label>备注<input type="text" id="t_notes" placeholder="可选"></label>
+    </div>
+    <div class="tf-actions">
+      <span class="trade-form-msg" id="tradeMsg"></span>
+      <button type="button" class="update-btn" onclick="submitTrade()">📥 保存这笔交易</button>
+    </div>
+  </form>
+</section>
+<section>
+  <h2>📋 交易流水 <span class="rating-count">10 笔</span></h2>
+  
+        <div class="table-wrap">
+          <table class="trade-table">
+            <thead><tr><th>日期</th><th>股票</th><th>方向</th><th>价格</th><th>数量</th><th>金额</th><th>备注</th></tr></thead>
+            <tbody>
+            <tr>
+              <td>2026-08-07</td>
+              <td class="td-name">红利低波ETF华泰柏瑞<span class="td-code">512890</span></td>
+              <td><span class="side-badge" style="color:#10b981;background:#10b9811f;">买入</span></td>
+              <td class="td-r">1.1590</td>
+              <td class="td-r">4,300</td>
+              <td class="td-r">¥4,983.70</td>
+              <td><span class="trade-note">从照片录入</span></td>
+            </tr>
+            <tr>
+              <td>2026-08-07</td>
+              <td class="td-name">红利低波ETF华泰柏瑞<span class="td-code">512890</span></td>
+              <td><span class="side-badge" style="color:#10b981;background:#10b9811f;">买入</span></td>
+              <td class="td-r">1.1590</td>
+              <td class="td-r">13,000</td>
+              <td class="td-r">¥15,067.00</td>
+              <td><span class="trade-note">从照片录入</span></td>
+            </tr>
+            <tr>
+              <td>2026-08-12</td>
+              <td class="td-name">红利低波ETF华泰柏瑞<span class="td-code">512890</span></td>
+              <td><span class="side-badge" style="color:#10b981;background:#10b9811f;">买入</span></td>
+              <td class="td-r">1.1590</td>
+              <td class="td-r">12,900</td>
+              <td class="td-r">¥14,951.10</td>
+              <td><span class="trade-note">从照片录入</span></td>
+            </tr>
+            <tr>
+              <td>2026-08-13</td>
+              <td class="td-name">中天科技<span class="td-code">600522</span></td>
+              <td><span class="side-badge" style="color:#10b981;background:#10b9811f;">买入</span></td>
+              <td class="td-r">33.9900</td>
+              <td class="td-r">100</td>
+              <td class="td-r">¥3,399.00</td>
+              <td><span class="trade-note">从照片录入</span></td>
+            </tr>
+            <tr>
+              <td>2026-09-01</td>
+              <td class="td-name">红利低波ETF华泰柏瑞<span class="td-code">512890</span></td>
+              <td><span class="side-badge" style="color:#f43f5e;background:#f43f5e1f;">卖出</span></td>
+              <td class="td-r">1.2050</td>
+              <td class="td-r">10,000</td>
+              <td class="td-r">¥12,050.00</td>
+              <td><span class="trade-note">从照片录入</span></td>
+            </tr>
+            <tr>
+              <td>2026-09-01</td>
+              <td class="td-name">红利低波ETF华泰柏瑞<span class="td-code">512890</span></td>
+              <td><span class="side-badge" style="color:#f43f5e;background:#f43f5e1f;">卖出</span></td>
+              <td class="td-r">1.2060</td>
+              <td class="td-r">5,000</td>
+              <td class="td-r">¥6,030.00</td>
+              <td><span class="trade-note">从照片录入</span></td>
+            </tr>
+            <tr>
+              <td>2026-09-01</td>
+              <td class="td-name">红利低波ETF华泰柏瑞<span class="td-code">512890</span></td>
+              <td><span class="side-badge" style="color:#f43f5e;background:#f43f5e1f;">卖出</span></td>
+              <td class="td-r">1.2070</td>
+              <td class="td-r">10,100</td>
+              <td class="td-r">¥12,190.70</td>
+              <td><span class="trade-note">从照片录入</span></td>
+            </tr>
+            <tr>
+              <td>2026-09-04</td>
+              <td class="td-name">红利低波ETF华泰柏瑞<span class="td-code">512890</span></td>
+              <td><span class="side-badge" style="color:#f43f5e;background:#f43f5e1f;">卖出</span></td>
+              <td class="td-r">1.2070</td>
+              <td class="td-r">5,100</td>
+              <td class="td-r">¥6,155.70</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>2026-09-07</td>
+              <td class="td-name">中天科技<span class="td-code">600522</span></td>
+              <td><span class="side-badge" style="color:#f43f5e;background:#f43f5e1f;">卖出</span></td>
+              <td class="td-r">32.4700</td>
+              <td class="td-r">100</td>
+              <td class="td-r">¥3,247.00</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>2026-09-09</td>
+              <td class="td-name">海尔智家<span class="td-code">600690</span></td>
+              <td><span class="side-badge" style="color:#10b981;background:#10b9811f;">买入</span></td>
+              <td class="td-r">21.3800</td>
+              <td class="td-r">800</td>
+              <td class="td-r">¥17,104.00</td>
+              <td></td>
+            </tr></tbody>
+          </table>
+        </div>
+</section>
+</div>
+
+<div class="tab-pane" id="tab-1">
     <section>
       <h2><span class="num">ALL</span>全部股票总览 · 点击表头可排序 · 支持搜索</h2>
       <div class="all-stocks-toolbar">
@@ -2252,7 +2442,7 @@
     </section>
     </div>
 
-<div class="tab-pane" id="tab-1">
+<div class="tab-pane" id="tab-2">
     <section>
       <h2><span class="num">💰</span>所有股票当天价格区间 · 妙想 MCP 实时数据</h2>
       <div class="price-zone-legend">
@@ -3628,7 +3818,7 @@
               <div class="zc-meta">振幅 0% · 区间宽度 0.0%</div>
             </div></div></div></section></div>
 
-<div class="tab-pane" id="tab-2"><section class="logic-section"><h2><span class="num">IND</span>农业补种与农资</h2><p class="thesis">南方洪涝补种加病虫害加化肥加华北干旱</p><div class="logic-grid"><div class="logic-card"><div class="title">1 补种需求</div><div class="desc">水稻/玉米/蔬菜紧急补种</div></div><div class="logic-card"><div class="title">2 化肥需求</div><div class="desc">灾后复种带动复合肥需求</div></div><div class="logic-card"><div class="title">3 农药需求</div><div class="desc">涝后病虫害高发杀虫剂/杀菌剂需求上升</div></div><div class="logic-card"><div class="title">4 华北干旱</div><div class="desc">耐旱品种加节水灌溉需求</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
+<div class="tab-pane" id="tab-3"><section class="logic-section"><h2><span class="num">IND</span>农业补种与农资</h2><p class="thesis">南方洪涝补种加病虫害加化肥加华北干旱</p><div class="logic-grid"><div class="logic-card"><div class="title">1 补种需求</div><div class="desc">水稻/玉米/蔬菜紧急补种</div></div><div class="logic-card"><div class="title">2 化肥需求</div><div class="desc">灾后复种带动复合肥需求</div></div><div class="logic-card"><div class="title">3 农药需求</div><div class="desc">涝后病虫害高发杀虫剂/杀菌剂需求上升</div></div><div class="logic-card"><div class="title">4 华北干旱</div><div class="desc">耐旱品种加节水灌溉需求</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
       <div class="score-card-header">
         <span class="rank-badge">#1</span>
         <span class="name-strong">新洋丰 ✓</span>
@@ -3968,7 +4158,7 @@
             <td style="color:#f59e0b; font-weight:700;">3/5</td>
             <td><b>66.0</b></td>
             <td><span class="pill pill-hold">HOLD</span></td>
-            <td><a href="javascript:void(0)" onclick="openReport('深度分析_002539_云图控股_v8_TOP1.html')" data-filename="深度分析_002539_云图控股_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-3"><section class="logic-section"><h2><span class="num">IND</span>AI 应用</h2><p class="thesis">大模型应用爆发加AI Agent加多模态</p><div class="logic-grid"><div class="logic-card"><div class="title">1 大模型应用</div><div class="desc">国内大模型商业化加速</div></div><div class="logic-card"><div class="title">2 企业级AI</div><div class="desc">用友/恒生电子等B端龙头</div></div><div class="logic-card"><div class="title">3 行业AI</div><div class="desc">卫宁健康医疗AI等垂直龙头</div></div><div class="logic-card"><div class="title">4 AI芯片</div><div class="desc">寒武纪国产替代核心</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
+            <td><a href="javascript:void(0)" onclick="openReport('深度分析_002539_云图控股_v8_TOP1.html')" data-filename="深度分析_002539_云图控股_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-4"><section class="logic-section"><h2><span class="num">IND</span>AI 应用</h2><p class="thesis">大模型应用爆发加AI Agent加多模态</p><div class="logic-grid"><div class="logic-card"><div class="title">1 大模型应用</div><div class="desc">国内大模型商业化加速</div></div><div class="logic-card"><div class="title">2 企业级AI</div><div class="desc">用友/恒生电子等B端龙头</div></div><div class="logic-card"><div class="title">3 行业AI</div><div class="desc">卫宁健康医疗AI等垂直龙头</div></div><div class="logic-card"><div class="title">4 AI芯片</div><div class="desc">寒武纪国产替代核心</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
       <div class="score-card-header">
         <span class="rank-badge">#1</span>
         <span class="name-strong">寒武纪 ✓</span>
@@ -4563,7 +4753,7 @@
             <td style="color:#10b981; font-weight:700;">4/5</td>
             <td><b>46.0</b></td>
             <td><span class="pill pill-buy">BUY</span></td>
-            <td><a href="javascript:void(0)" onclick="openReport('深度分析_600588_用友网络_v8_TOP1.html')" data-filename="深度分析_600588_用友网络_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-4"><section class="logic-section"><h2><span class="num">IND</span>啤酒与饮料</h2><p class="thesis">高温拉动户外/餐饮/夜宵消费</p><div class="logic-grid"><div class="logic-card"><div class="title">1 高温场景</div><div class="desc">户外活动、夜宵、餐饮增加</div></div><div class="logic-card"><div class="title">2 高端化</div><div class="desc">重庆/青岛毛利率提升</div></div><div class="logic-card"><div class="title">3 功能饮料</div><div class="desc">东鹏饮料渠道扩张</div></div><div class="logic-card"><div class="title">4 存量竞争</div><div class="desc">啤酒进入存量竞争+升级</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
+            <td><a href="javascript:void(0)" onclick="openReport('深度分析_600588_用友网络_v8_TOP1.html')" data-filename="深度分析_600588_用友网络_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-5"><section class="logic-section"><h2><span class="num">IND</span>啤酒与饮料</h2><p class="thesis">高温拉动户外/餐饮/夜宵消费</p><div class="logic-grid"><div class="logic-card"><div class="title">1 高温场景</div><div class="desc">户外活动、夜宵、餐饮增加</div></div><div class="logic-card"><div class="title">2 高端化</div><div class="desc">重庆/青岛毛利率提升</div></div><div class="logic-card"><div class="title">3 功能饮料</div><div class="desc">东鹏饮料渠道扩张</div></div><div class="logic-card"><div class="title">4 存量竞争</div><div class="desc">啤酒进入存量竞争+升级</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
       <div class="score-card-header">
         <span class="rank-badge">#1</span>
         <span class="name-strong">燕京啤酒 ✓</span>
@@ -4903,7 +5093,7 @@
             <td style="color:#f59e0b; font-weight:700;">3/5</td>
             <td><b>55.0</b></td>
             <td><span class="pill pill-hold">HOLD</span></td>
-            <td><a href="javascript:void(0)" onclick="openReport('深度分析_600132_重庆啤酒_v8_TOP1.html')" data-filename="深度分析_600132_重庆啤酒_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-5"><section class="logic-section"><h2><span class="num">IND</span>生物医药</h2><p class="thesis">申万二级 生物医药</p><div class="logic-grid"></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
+            <td><a href="javascript:void(0)" onclick="openReport('深度分析_600132_重庆啤酒_v8_TOP1.html')" data-filename="深度分析_600132_重庆啤酒_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-6"><section class="logic-section"><h2><span class="num">IND</span>生物医药</h2><p class="thesis">申万二级 生物医药</p><div class="logic-grid"></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
       <div class="score-card-header">
         <span class="rank-badge">#1</span>
         <span class="name-strong">迈瑞医疗 ✓</span>
@@ -4988,7 +5178,7 @@
             <td style="color:#10b981; font-weight:700;">5/5</td>
             <td><b>59.0</b></td>
             <td><span class="pill pill-buy">BUY</span></td>
-            <td><a href="javascript:void(0)" onclick="openReport('深度分析_300760_迈瑞医疗_v8_TOP1.html')" data-filename="深度分析_300760_迈瑞医疗_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-6"><section class="logic-section"><h2><span class="num">IND</span>冷链物流</h2><p class="thesis">高温拉动生鲜/速冻/疫苗冷链</p><div class="logic-grid"><div class="logic-card"><div class="title">1 商用冷柜</div><div class="desc">海容冷链冷饮/速冻渠道扩张</div></div><div class="logic-card"><div class="title">2 工业制冷</div><div class="desc">冰轮环境稳健增长</div></div><div class="logic-card"><div class="title">3 综合物流</div><div class="desc">顺丰冷链占比不大</div></div><div class="logic-card"><div class="title">4 长期成长</div><div class="desc">冷链行业增长逻辑清晰</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
+            <td><a href="javascript:void(0)" onclick="openReport('深度分析_300760_迈瑞医疗_v8_TOP1.html')" data-filename="深度分析_300760_迈瑞医疗_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-7"><section class="logic-section"><h2><span class="num">IND</span>冷链物流</h2><p class="thesis">高温拉动生鲜/速冻/疫苗冷链</p><div class="logic-grid"><div class="logic-card"><div class="title">1 商用冷柜</div><div class="desc">海容冷链冷饮/速冻渠道扩张</div></div><div class="logic-card"><div class="title">2 工业制冷</div><div class="desc">冰轮环境稳健增长</div></div><div class="logic-card"><div class="title">3 综合物流</div><div class="desc">顺丰冷链占比不大</div></div><div class="logic-card"><div class="title">4 长期成长</div><div class="desc">冷链行业增长逻辑清晰</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
       <div class="score-card-header">
         <span class="rank-badge">#1</span>
         <span class="name-strong">海容冷链 ✓</span>
@@ -5243,7 +5433,7 @@
             <td style="color:#f59e0b; font-weight:700;">3/5</td>
             <td><b>45.0</b></td>
             <td><span class="pill pill-hold">HOLD</span></td>
-            <td><a href="javascript:void(0)" onclick="openReport('深度分析_000811_冰轮环境_v8_TOP1.html')" data-filename="深度分析_000811_冰轮环境_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-7"><section class="logic-section"><h2><span class="num">IND</span>干旱地区灌溉与节水</h2><p class="thesis">华北/黄淮干旱加节水灌溉</p><div class="logic-grid"><div class="logic-card"><div class="title">1 华北干旱</div><div class="desc">夏玉米/大豆播种受影响</div></div><div class="logic-card"><div class="title">2 节水灌溉</div><div class="desc">大禹节水政策驱动</div></div><div class="logic-card"><div class="title">3 应急供水</div><div class="desc">青龙管业华北抗旱应急</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
+            <td><a href="javascript:void(0)" onclick="openReport('深度分析_000811_冰轮环境_v8_TOP1.html')" data-filename="深度分析_000811_冰轮环境_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-8"><section class="logic-section"><h2><span class="num">IND</span>干旱地区灌溉与节水</h2><p class="thesis">华北/黄淮干旱加节水灌溉</p><div class="logic-grid"><div class="logic-card"><div class="title">1 华北干旱</div><div class="desc">夏玉米/大豆播种受影响</div></div><div class="logic-card"><div class="title">2 节水灌溉</div><div class="desc">大禹节水政策驱动</div></div><div class="logic-card"><div class="title">3 应急供水</div><div class="desc">青龙管业华北抗旱应急</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
       <div class="score-card-header">
         <span class="rank-badge">#1</span>
         <span class="name-strong">大禹节水 ✓</span>
@@ -5583,7 +5773,7 @@
             <td style="color:#f59e0b; font-weight:700;">3/5</td>
             <td><b>39.0</b></td>
             <td><span class="pill pill-watch">WATCH</span></td>
-            <td><a href="javascript:void(0)" onclick="openReport('深度分析_830964_润农节水_v8_TOP1.html')" data-filename="深度分析_830964_润农节水_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-8"><section class="logic-section"><h2><span class="num">IND</span>应急药品与消杀</h2><p class="thesis">防暑+灾后防疫需求</p><div class="logic-grid"><div class="logic-card"><div class="title">1 防暑药</div><div class="desc">藿香正气液夏季核心需求</div></div><div class="logic-card"><div class="title">2 灾后防疫</div><div class="desc">洪涝后消杀/抗感染</div></div><div class="logic-card"><div class="title">3 医疗设备</div><div class="desc">鱼跃医疗稳健增长</div></div><div class="logic-card"><div class="title">4 事件驱动</div><div class="desc">短期脉冲全年有限</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
+            <td><a href="javascript:void(0)" onclick="openReport('深度分析_830964_润农节水_v8_TOP1.html')" data-filename="深度分析_830964_润农节水_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-9"><section class="logic-section"><h2><span class="num">IND</span>应急药品与消杀</h2><p class="thesis">防暑+灾后防疫需求</p><div class="logic-grid"><div class="logic-card"><div class="title">1 防暑药</div><div class="desc">藿香正气液夏季核心需求</div></div><div class="logic-card"><div class="title">2 灾后防疫</div><div class="desc">洪涝后消杀/抗感染</div></div><div class="logic-card"><div class="title">3 医疗设备</div><div class="desc">鱼跃医疗稳健增长</div></div><div class="logic-card"><div class="title">4 事件驱动</div><div class="desc">短期脉冲全年有限</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
       <div class="score-card-header">
         <span class="rank-badge">#1</span>
         <span class="name-strong">鱼跃医疗 ✓</span>
@@ -6008,7 +6198,7 @@
             <td style="color:#f59e0b; font-weight:700;">3/5</td>
             <td><b>41.0</b></td>
             <td><span class="pill pill-hold">HOLD</span></td>
-            <td><a href="javascript:void(0)" onclick="openReport('深度分析_600129_太极集团_v8_TOP1.html')" data-filename="深度分析_600129_太极集团_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-9"><section class="logic-section"><h2><span class="num">IND</span>应急食品与饮用水</h2><p class="thesis">极端天气家庭应急储备需求脉冲</p><div class="logic-grid"><div class="logic-card"><div class="title">1 应急储备</div><div class="desc">速冻/榨菜耐储存食品需求</div></div><div class="logic-card"><div class="title">2 乳制品</div><div class="desc">伊利常温奶耐储存</div></div><div class="logic-card"><div class="title">3 周期弹性</div><div class="desc">阶段性囤货脉冲</div></div><div class="logic-card"><div class="title">4 品牌护城河</div><div class="desc">涪陵/伊利品牌力强</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
+            <td><a href="javascript:void(0)" onclick="openReport('深度分析_600129_太极集团_v8_TOP1.html')" data-filename="深度分析_600129_太极集团_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-10"><section class="logic-section"><h2><span class="num">IND</span>应急食品与饮用水</h2><p class="thesis">极端天气家庭应急储备需求脉冲</p><div class="logic-grid"><div class="logic-card"><div class="title">1 应急储备</div><div class="desc">速冻/榨菜耐储存食品需求</div></div><div class="logic-card"><div class="title">2 乳制品</div><div class="desc">伊利常温奶耐储存</div></div><div class="logic-card"><div class="title">3 周期弹性</div><div class="desc">阶段性囤货脉冲</div></div><div class="logic-card"><div class="title">4 品牌护城河</div><div class="desc">涪陵/伊利品牌力强</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
       <div class="score-card-header">
         <span class="rank-badge">#1</span>
         <span class="name-strong">涪陵榨菜 ✓</span>
@@ -6348,7 +6538,7 @@
             <td style="color:#f59e0b; font-weight:700;">3/5</td>
             <td><b>54.0</b></td>
             <td><span class="pill pill-hold">HOLD</span></td>
-            <td><a href="javascript:void(0)" onclick="openReport('深度分析_002661_克明食品_v8_TOP1.html')" data-filename="深度分析_002661_克明食品_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-10"><section class="logic-section"><h2><span class="num">IND</span>应急电源与照明</h2><p class="thesis">断电触发小型发电机/储能电池需求</p><div class="logic-grid"><div class="logic-card"><div class="title">1 发电机</div><div class="desc">神驰/宗申小型发电机直接受益</div></div><div class="logic-card"><div class="title">2 储能</div><div class="desc">骆驼/南都后备电源</div></div><div class="logic-card"><div class="title">3 民用电工</div><div class="desc">公牛插座/移动电源</div></div><div class="logic-card"><div class="title">4 出口</div><div class="desc">神驰/宗申海外应急需求</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
+            <td><a href="javascript:void(0)" onclick="openReport('深度分析_002661_克明食品_v8_TOP1.html')" data-filename="深度分析_002661_克明食品_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-11"><section class="logic-section"><h2><span class="num">IND</span>应急电源与照明</h2><p class="thesis">断电触发小型发电机/储能电池需求</p><div class="logic-grid"><div class="logic-card"><div class="title">1 发电机</div><div class="desc">神驰/宗申小型发电机直接受益</div></div><div class="logic-card"><div class="title">2 储能</div><div class="desc">骆驼/南都后备电源</div></div><div class="logic-card"><div class="title">3 民用电工</div><div class="desc">公牛插座/移动电源</div></div><div class="logic-card"><div class="title">4 出口</div><div class="desc">神驰/宗申海外应急需求</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
       <div class="score-card-header">
         <span class="rank-badge">#1</span>
         <span class="name-strong">骆驼股份 ✓</span>
@@ -6773,7 +6963,7 @@
             <td style="color:#f59e0b; font-weight:700;">3/5</td>
             <td><b>28.0</b></td>
             <td><span class="pill pill-hold">HOLD</span></td>
-            <td><a href="javascript:void(0)" onclick="openReport('深度分析_300068_南都电源_v8_TOP1.html')" data-filename="深度分析_300068_南都电源_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-11"><section class="logic-section"><h2><span class="num">IND</span>防水排涝应急工具</h2><p class="thesis">洪涝抽水泵/防水挡板需求</p><div class="logic-grid"><div class="logic-card"><div class="title">1 水泵刚需</div><div class="desc">排涝核心设备</div></div><div class="logic-card"><div class="title">2 应急服装</div><div class="desc">际华军需品</div></div><div class="logic-card"><div class="title">3 出口弹性</div><div class="desc">凌霄出口占比高</div></div><div class="logic-card"><div class="title">4 盈利稳健</div><div class="desc">大元/凌霄经营质量好</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
+            <td><a href="javascript:void(0)" onclick="openReport('深度分析_300068_南都电源_v8_TOP1.html')" data-filename="深度分析_300068_南都电源_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-12"><section class="logic-section"><h2><span class="num">IND</span>防水排涝应急工具</h2><p class="thesis">洪涝抽水泵/防水挡板需求</p><div class="logic-grid"><div class="logic-card"><div class="title">1 水泵刚需</div><div class="desc">排涝核心设备</div></div><div class="logic-card"><div class="title">2 应急服装</div><div class="desc">际华军需品</div></div><div class="logic-card"><div class="title">3 出口弹性</div><div class="desc">凌霄出口占比高</div></div><div class="logic-card"><div class="title">4 盈利稳健</div><div class="desc">大元/凌霄经营质量好</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
       <div class="score-card-header">
         <span class="rank-badge">#1</span>
         <span class="name-strong">凌霄泵业 ✓</span>
@@ -7198,7 +7388,7 @@
             <td style="color:#f59e0b; font-weight:700;">3/5</td>
             <td><b>38.0</b></td>
             <td><span class="pill pill-hold">HOLD</span></td>
-            <td><a href="javascript:void(0)" onclick="openReport('深度分析_300526_中潜股份_v8_TOP1.html')" data-filename="深度分析_300526_中潜股份_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-12"><section class="logic-section"><h2><span class="num">IND</span>环境治理与消毒防疫</h2><p class="thesis">洪涝后污水处理加消毒加防疫</p><div class="logic-grid"><div class="logic-card"><div class="title">1 污水处理</div><div class="desc">市政污水加工业水处理需求</div></div><div class="logic-card"><div class="title">2 环境消杀</div><div class="desc">上海洗霸直接受益</div></div><div class="logic-card"><div class="title">3 防暑防疫药</div><div class="desc">太极集团/鲁抗医药主题受益</div></div><div class="logic-card"><div class="title">4 政策驱动</div><div class="desc">灾后环境治理是政府重点投入</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
+            <td><a href="javascript:void(0)" onclick="openReport('深度分析_300526_中潜股份_v8_TOP1.html')" data-filename="深度分析_300526_中潜股份_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-13"><section class="logic-section"><h2><span class="num">IND</span>环境治理与消毒防疫</h2><p class="thesis">洪涝后污水处理加消毒加防疫</p><div class="logic-grid"><div class="logic-card"><div class="title">1 污水处理</div><div class="desc">市政污水加工业水处理需求</div></div><div class="logic-card"><div class="title">2 环境消杀</div><div class="desc">上海洗霸直接受益</div></div><div class="logic-card"><div class="title">3 防暑防疫药</div><div class="desc">太极集团/鲁抗医药主题受益</div></div><div class="logic-card"><div class="title">4 政策驱动</div><div class="desc">灾后环境治理是政府重点投入</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
       <div class="score-card-header">
         <span class="rank-badge">#1</span>
         <span class="name-strong">兴蓉环境 ✓</span>
@@ -7708,7 +7898,7 @@
             <td style="color:#fb923c; font-weight:700;">2/5</td>
             <td><b>38.0</b></td>
             <td><span class="pill pill-watch">WATCH</span></td>
-            <td><a href="javascript:void(0)" onclick="openReport('深度分析_600513_联环药业_v8_TOP1.html')" data-filename="深度分析_600513_联环药业_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-13"><section class="logic-section"><h2><span class="num">IND</span>电力设施抢修与配网升级</h2><p class="thesis">配网抢修加配网自动化升级</p><div class="logic-grid"><div class="logic-card"><div class="title">1 配网抢修</div><div class="desc">恢复供电是灾后首要任务</div></div><div class="logic-card"><div class="title">2 配网自动化</div><div class="desc">抗灾能力升级需求</div></div><div class="logic-card"><div class="title">3 变压器需求</div><div class="desc">干式变压器加主网变压器双重需求</div></div><div class="logic-card"><div class="title">4 南网国网投资</div><div class="desc">迎峰度夏保供投入</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
+            <td><a href="javascript:void(0)" onclick="openReport('深度分析_600513_联环药业_v8_TOP1.html')" data-filename="深度分析_600513_联环药业_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-14"><section class="logic-section"><h2><span class="num">IND</span>电力设施抢修与配网升级</h2><p class="thesis">配网抢修加配网自动化升级</p><div class="logic-grid"><div class="logic-card"><div class="title">1 配网抢修</div><div class="desc">恢复供电是灾后首要任务</div></div><div class="logic-card"><div class="title">2 配网自动化</div><div class="desc">抗灾能力升级需求</div></div><div class="logic-card"><div class="title">3 变压器需求</div><div class="desc">干式变压器加主网变压器双重需求</div></div><div class="logic-card"><div class="title">4 南网国网投资</div><div class="desc">迎峰度夏保供投入</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
       <div class="score-card-header">
         <span class="rank-badge">#1</span>
         <span class="name-strong">东方电子 ✓</span>
@@ -8218,7 +8408,7 @@
             <td style="color:#10b981; font-weight:700;">4/5</td>
             <td><b>58.0</b></td>
             <td><span class="pill pill-hold">HOLD</span></td>
-            <td><a href="javascript:void(0)" onclick="openReport('深度分析_000400_许继电气_v8_TOP1.html')" data-filename="深度分析_000400_许继电气_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-14"><section class="logic-section"><h2><span class="num">IND</span>白色家电</h2><p class="thesis">高温直接拉动内销与出口</p><div class="logic-grid"><div class="logic-card"><div class="title">1 内销高温催化</div><div class="desc">厄尔尼诺年夏季高温延长空调销售旺季</div></div><div class="logic-card"><div class="title">2 出口红利</div><div class="desc">东南亚/中东/南亚高温市场拉动出口</div></div><div class="logic-card"><div class="title">3 零部件弹性</div><div class="desc">三花智控/盾安环境零部件受益</div></div><div class="logic-card"><div class="title">4 估值修复</div><div class="desc">PE 7-10x 隐含悲观预期</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
+            <td><a href="javascript:void(0)" onclick="openReport('深度分析_000400_许继电气_v8_TOP1.html')" data-filename="深度分析_000400_许继电气_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-15"><section class="logic-section"><h2><span class="num">IND</span>白色家电</h2><p class="thesis">高温直接拉动内销与出口</p><div class="logic-grid"><div class="logic-card"><div class="title">1 内销高温催化</div><div class="desc">厄尔尼诺年夏季高温延长空调销售旺季</div></div><div class="logic-card"><div class="title">2 出口红利</div><div class="desc">东南亚/中东/南亚高温市场拉动出口</div></div><div class="logic-card"><div class="title">3 零部件弹性</div><div class="desc">三花智控/盾安环境零部件受益</div></div><div class="logic-card"><div class="title">4 估值修复</div><div class="desc">PE 7-10x 隐含悲观预期</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
       <div class="score-card-header">
         <span class="rank-badge">#1</span>
         <span class="name-strong">海尔智家 ✓</span>
@@ -9125,7 +9315,7 @@
             <td style="color:#fb923c; font-weight:700;">2/5</td>
             <td><b>33.0</b></td>
             <td><span class="pill pill-sell">SELL</span></td>
-            <td><a href="javascript:void(0)" onclick="openReport('深度分析_002242_九阳股份_v8_TOP1.html')" data-filename="深度分析_002242_九阳股份_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-15"><section class="logic-section"><h2><span class="num">IND</span>农业保险</h2><p class="thesis">极端天气提升农险/财险需求</p><div class="logic-grid"><div class="logic-card"><div class="title">1 农险龙头</div><div class="desc">中国人保市场份额第一</div></div><div class="logic-card"><div class="title">2 综合金融</div><div class="desc">平安财险+健康险</div></div><div class="logic-card"><div class="title">3 防御属性</div><div class="desc">灾年业绩相对稳健</div></div><div class="logic-card"><div class="title">4 政策驱动</div><div class="desc">农险补贴持续加码</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
+            <td><a href="javascript:void(0)" onclick="openReport('深度分析_002242_九阳股份_v8_TOP1.html')" data-filename="深度分析_002242_九阳股份_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-16"><section class="logic-section"><h2><span class="num">IND</span>农业保险</h2><p class="thesis">极端天气提升农险/财险需求</p><div class="logic-grid"><div class="logic-card"><div class="title">1 农险龙头</div><div class="desc">中国人保市场份额第一</div></div><div class="logic-card"><div class="title">2 综合金融</div><div class="desc">平安财险+健康险</div></div><div class="logic-card"><div class="title">3 防御属性</div><div class="desc">灾年业绩相对稳健</div></div><div class="logic-card"><div class="title">4 政策驱动</div><div class="desc">农险补贴持续加码</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
       <div class="score-card-header">
         <span class="rank-badge">#1</span>
         <span class="name-strong">中国人保 ✓</span>
@@ -9380,7 +9570,7 @@
             <td style="color:#f59e0b; font-weight:700;">3/5</td>
             <td><b>65.0</b></td>
             <td><span class="pill pill-hold">HOLD</span></td>
-            <td><a href="javascript:void(0)" onclick="openReport('深度分析_601318_中国平安_v8_TOP1.html')" data-filename="深度分析_601318_中国平安_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-16"><section class="logic-section"><h2><span class="num">IND</span>工程机械与灾后重建</h2><p class="thesis">清淤修复加水泥/防水/管材需求</p><div class="logic-grid"><div class="logic-card"><div class="title">1 工程机械</div><div class="desc">三一重工/徐工机械清淤修复</div></div><div class="logic-card"><div class="title">2 水泥需求</div><div class="desc">海螺水泥/华新水泥区域弹性</div></div><div class="logic-card"><div class="title">3 防水材料</div><div class="desc">东方雨虹龙头市占率高</div></div><div class="logic-card"><div class="title">4 塑料管道</div><div class="desc">伟星新材C端龙头</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
+            <td><a href="javascript:void(0)" onclick="openReport('深度分析_601318_中国平安_v8_TOP1.html')" data-filename="深度分析_601318_中国平安_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-17"><section class="logic-section"><h2><span class="num">IND</span>工程机械与灾后重建</h2><p class="thesis">清淤修复加水泥/防水/管材需求</p><div class="logic-grid"><div class="logic-card"><div class="title">1 工程机械</div><div class="desc">三一重工/徐工机械清淤修复</div></div><div class="logic-card"><div class="title">2 水泥需求</div><div class="desc">海螺水泥/华新水泥区域弹性</div></div><div class="logic-card"><div class="title">3 防水材料</div><div class="desc">东方雨虹龙头市占率高</div></div><div class="logic-card"><div class="title">4 塑料管道</div><div class="desc">伟星新材C端龙头</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
       <div class="score-card-header">
         <span class="rank-badge">#1</span>
         <span class="name-strong">海螺水泥 ✓</span>
@@ -10060,7 +10250,7 @@
             <td style="color:#10b981; font-weight:700;">5/5</td>
             <td><b>58.0</b></td>
             <td><span class="pill pill-buy">BUY</span></td>
-            <td><a href="javascript:void(0)" onclick="openReport('深度分析_002271_东方雨虹_v8_TOP1.html')" data-filename="深度分析_002271_东方雨虹_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-17"><section class="logic-section"><h2><span class="num">IND</span>新能源</h2><p class="thesis">申万二级 新能源</p><div class="logic-grid"></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
+            <td><a href="javascript:void(0)" onclick="openReport('深度分析_002271_东方雨虹_v8_TOP1.html')" data-filename="深度分析_002271_东方雨虹_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-18"><section class="logic-section"><h2><span class="num">IND</span>新能源</h2><p class="thesis">申万二级 新能源</p><div class="logic-grid"></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
       <div class="score-card-header">
         <span class="rank-badge">#1</span>
         <span class="name-strong">宁德时代 ✓</span>
@@ -10230,7 +10420,7 @@
             <td style="color:#10b981; font-weight:700;">5/5</td>
             <td><b>65.0</b></td>
             <td><span class="pill pill-buy">BUY</span></td>
-            <td><a href="javascript:void(0)" onclick="openReport('深度分析_002594_比亚迪_v8_TOP1.html')" data-filename="深度分析_002594_比亚迪_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-18"><section class="logic-section"><h2><span class="num">IND</span>核电重启</h2><p class="thesis">核电核准加速加第四代核电技术国产化</p><div class="logic-grid"><div class="logic-card"><div class="title">1 核电核准加速</div><div class="desc">2025-2030 年均核准 6-8 台机组</div></div><div class="logic-card"><div class="title">2 运营双寡头</div><div class="desc">中国核电加中国广核垄断运营</div></div><div class="logic-card"><div class="title">3 装备国产化</div><div class="desc">江苏神通阀门市占率 70% 加</div></div><div class="logic-card"><div class="title">4 碳中和主线</div><div class="desc">清洁能源长期成长确定</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
+            <td><a href="javascript:void(0)" onclick="openReport('深度分析_002594_比亚迪_v8_TOP1.html')" data-filename="深度分析_002594_比亚迪_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-19"><section class="logic-section"><h2><span class="num">IND</span>核电重启</h2><p class="thesis">核电核准加速加第四代核电技术国产化</p><div class="logic-grid"><div class="logic-card"><div class="title">1 核电核准加速</div><div class="desc">2025-2030 年均核准 6-8 台机组</div></div><div class="logic-card"><div class="title">2 运营双寡头</div><div class="desc">中国核电加中国广核垄断运营</div></div><div class="logic-card"><div class="title">3 装备国产化</div><div class="desc">江苏神通阀门市占率 70% 加</div></div><div class="logic-card"><div class="title">4 碳中和主线</div><div class="desc">清洁能源长期成长确定</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
       <div class="score-card-header">
         <span class="rank-badge">#1</span>
         <span class="name-strong">久立特材 ✓</span>
@@ -10740,7 +10930,7 @@
             <td style="color:#f59e0b; font-weight:700;">3/5</td>
             <td><b>40.0</b></td>
             <td><span class="pill pill-hold">HOLD</span></td>
-            <td><a href="javascript:void(0)" onclick="openReport('深度分析_002366_融发核电_v8_TOP1.html')" data-filename="深度分析_002366_融发核电_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-19"><section class="logic-section"><h2><span class="num">IND</span>防暑降温及肠道药品</h2><p class="thesis">高温健康需求脉冲</p><div class="logic-grid"><div class="logic-card"><div class="title">1 需求脉冲</div><div class="desc">中暑/腹泻发病率上升带动药品需求</div></div><div class="logic-card"><div class="title">2 王老吉凉茶</div><div class="desc">白云山凉茶大单品直接受益</div></div><div class="logic-card"><div class="title">3 藿香正气液</div><div class="desc">太极集团夏季刚需药</div></div><div class="logic-card"><div class="title">4 局限性</div><div class="desc">脉冲式需求全年贡献有限</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
+            <td><a href="javascript:void(0)" onclick="openReport('深度分析_002366_融发核电_v8_TOP1.html')" data-filename="深度分析_002366_融发核电_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-20"><section class="logic-section"><h2><span class="num">IND</span>防暑降温及肠道药品</h2><p class="thesis">高温健康需求脉冲</p><div class="logic-grid"><div class="logic-card"><div class="title">1 需求脉冲</div><div class="desc">中暑/腹泻发病率上升带动药品需求</div></div><div class="logic-card"><div class="title">2 王老吉凉茶</div><div class="desc">白云山凉茶大单品直接受益</div></div><div class="logic-card"><div class="title">3 藿香正气液</div><div class="desc">太极集团夏季刚需药</div></div><div class="logic-card"><div class="title">4 局限性</div><div class="desc">脉冲式需求全年贡献有限</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
       <div class="score-card-header">
         <span class="rank-badge">#1</span>
         <span class="name-strong">以岭药业 ✓</span>
@@ -10910,7 +11100,7 @@
             <td style="color:#10b981; font-weight:700;">5/5</td>
             <td><b>60.0</b></td>
             <td><span class="pill pill-hold">HOLD</span></td>
-            <td><a href="javascript:void(0)" onclick="openReport('深度分析_600085_同仁堂_v8_TOP1.html')" data-filename="深度分析_600085_同仁堂_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-20"><section class="logic-section"><h2><span class="num">IND</span>电网设备与火电</h2><p class="thesis">用电负荷创纪录，电网加火电多线受益</p><div class="logic-grid"><div class="logic-card"><div class="title">1 用电负荷创新高</div><div class="desc">空调负荷激增电网最大负荷创新高</div></div><div class="logic-card"><div class="title">2 电网设备</div><div class="desc">国电南瑞/平高电气订单饱满</div></div><div class="logic-card"><div class="title">3 火电基荷</div><div class="desc">水电出力下降火电利用小时数提升</div></div><div class="logic-card"><div class="title">4 风险</div><div class="desc">电价调控加煤价波动</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
+            <td><a href="javascript:void(0)" onclick="openReport('深度分析_600085_同仁堂_v8_TOP1.html')" data-filename="深度分析_600085_同仁堂_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-21"><section class="logic-section"><h2><span class="num">IND</span>电网设备与火电</h2><p class="thesis">用电负荷创纪录，电网加火电多线受益</p><div class="logic-grid"><div class="logic-card"><div class="title">1 用电负荷创新高</div><div class="desc">空调负荷激增电网最大负荷创新高</div></div><div class="logic-card"><div class="title">2 电网设备</div><div class="desc">国电南瑞/平高电气订单饱满</div></div><div class="logic-card"><div class="title">3 火电基荷</div><div class="desc">水电出力下降火电利用小时数提升</div></div><div class="logic-card"><div class="title">4 风险</div><div class="desc">电价调控加煤价波动</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
       <div class="score-card-header">
         <span class="rank-badge">#1</span>
         <span class="name-strong">平高电气 ✓</span>
@@ -11165,7 +11355,7 @@
             <td style="color:#f59e0b; font-weight:700;">3/5</td>
             <td><b>47.0</b></td>
             <td><span class="pill pill-hold">HOLD</span></td>
-            <td><a href="javascript:void(0)" onclick="openReport('深度分析_600795_国电电力_v8_TOP1.html')" data-filename="深度分析_600795_国电电力_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-21"><section class="logic-section"><h2><span class="num">IND</span>制冷剂/氟化工</h2><p class="thesis">高温拉动空调+三代制冷剂配额供给受限</p><div class="logic-grid"><div class="logic-card"><div class="title">1 高温需求</div><div class="desc">厄尔尼诺空调产量超预期</div></div><div class="logic-card"><div class="title">2 三代配额</div><div class="desc">中国三代制冷剂供给刚性</div></div><div class="logic-card"><div class="title">3 龙头弹性</div><div class="desc">巨化股份配额最大弹性高</div></div><div class="logic-card"><div class="title">4 周期成长</div><div class="desc">需关注产品价差和景气位置</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
+            <td><a href="javascript:void(0)" onclick="openReport('深度分析_600795_国电电力_v8_TOP1.html')" data-filename="深度分析_600795_国电电力_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-22"><section class="logic-section"><h2><span class="num">IND</span>制冷剂/氟化工</h2><p class="thesis">高温拉动空调+三代制冷剂配额供给受限</p><div class="logic-grid"><div class="logic-card"><div class="title">1 高温需求</div><div class="desc">厄尔尼诺空调产量超预期</div></div><div class="logic-card"><div class="title">2 三代配额</div><div class="desc">中国三代制冷剂供给刚性</div></div><div class="logic-card"><div class="title">3 龙头弹性</div><div class="desc">巨化股份配额最大弹性高</div></div><div class="logic-card"><div class="title">4 周期成长</div><div class="desc">需关注产品价差和景气位置</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
       <div class="score-card-header">
         <span class="rank-badge">#1</span>
         <span class="name-strong">三美股份 ✓</span>
@@ -11505,7 +11695,7 @@
             <td style="color:#f59e0b; font-weight:700;">3/5</td>
             <td><b>62.0</b></td>
             <td><span class="pill pill-hold">HOLD</span></td>
-            <td><a href="javascript:void(0)" onclick="openReport('深度分析_600378_昊华科技_v8_TOP1.html')" data-filename="深度分析_600378_昊华科技_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-22"><section class="logic-section"><h2><span class="num">IND</span>种业</h2><p class="thesis">补种需求+转基因商业化</p><div class="logic-grid"><div class="logic-card"><div class="title">1 补种需求</div><div class="desc">南方洪涝+华北干旱</div></div><div class="logic-card"><div class="title">2 转基因</div><div class="desc">商业化提升长期空间</div></div><div class="logic-card"><div class="title">3 抗逆品种</div><div class="desc">抗旱/抗涝/抗高温品种需求</div></div><div class="logic-card"><div class="title">4 政策驱动</div><div class="desc">种业振兴政策支持</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
+            <td><a href="javascript:void(0)" onclick="openReport('深度分析_600378_昊华科技_v8_TOP1.html')" data-filename="深度分析_600378_昊华科技_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-23"><section class="logic-section"><h2><span class="num">IND</span>种业</h2><p class="thesis">补种需求+转基因商业化</p><div class="logic-grid"><div class="logic-card"><div class="title">1 补种需求</div><div class="desc">南方洪涝+华北干旱</div></div><div class="logic-card"><div class="title">2 转基因</div><div class="desc">商业化提升长期空间</div></div><div class="logic-card"><div class="title">3 抗逆品种</div><div class="desc">抗旱/抗涝/抗高温品种需求</div></div><div class="logic-card"><div class="title">4 政策驱动</div><div class="desc">种业振兴政策支持</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
       <div class="score-card-header">
         <span class="rank-badge">#1</span>
         <span class="name-strong">大北农 ✓</span>
@@ -11845,7 +12035,7 @@
             <td style="color:#f59e0b; font-weight:700;">3/5</td>
             <td><b>38.0</b></td>
             <td><span class="pill pill-hold">HOLD</span></td>
-            <td><a href="javascript:void(0)" onclick="openReport('深度分析_300087_荃银高科_v8_TOP1.html')" data-filename="深度分析_300087_荃银高科_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-23"><section class="logic-section"><h2><span class="num">IND</span>半导体</h2><p class="thesis">申万二级 半导体</p><div class="logic-grid"></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
+            <td><a href="javascript:void(0)" onclick="openReport('深度分析_300087_荃银高科_v8_TOP1.html')" data-filename="深度分析_300087_荃银高科_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-24"><section class="logic-section"><h2><span class="num">IND</span>半导体</h2><p class="thesis">申万二级 半导体</p><div class="logic-grid"></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
       <div class="score-card-header">
         <span class="rank-badge">#1</span>
         <span class="name-strong">中芯国际 ✓</span>
@@ -11930,7 +12120,7 @@
             <td style="color:#10b981; font-weight:700;">4/5</td>
             <td><b>60.0</b></td>
             <td><span class="pill pill-hold">HOLD</span></td>
-            <td><a href="javascript:void(0)" onclick="openReport('深度分析_688981_中芯国际_v8_TOP1.html')" data-filename="深度分析_688981_中芯国际_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-24"><section class="logic-section"><h2><span class="num">IND</span>软件开发</h2><p class="thesis">申万二级 软件开发</p><div class="logic-grid"></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
+            <td><a href="javascript:void(0)" onclick="openReport('深度分析_688981_中芯国际_v8_TOP1.html')" data-filename="深度分析_688981_中芯国际_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-25"><section class="logic-section"><h2><span class="num">IND</span>软件开发</h2><p class="thesis">申万二级 软件开发</p><div class="logic-grid"></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
       <div class="score-card-header">
         <span class="rank-badge">#1</span>
         <span class="name-strong">贵州茅台 ✓</span>
@@ -12015,7 +12205,7 @@
             <td style="color:#10b981; font-weight:700;">5/5</td>
             <td><b>77.0</b></td>
             <td><span class="pill pill-buy">BUY</span></td>
-            <td><a href="javascript:void(0)" onclick="openReport('深度分析_600519_贵州茅台_v8_TOP1.html')" data-filename="深度分析_600519_贵州茅台_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-25"><section class="logic-section"><h2><span class="num">IND</span>水利设施修复与排涝</h2><p class="thesis">洪灾后堤防/管网/泵站修复</p><div class="logic-grid"><div class="logic-card"><div class="title">1 管材需求</div><div class="desc">城市供排水管网修复加海绵城市</div></div><div class="logic-card"><div class="title">2 水泵需求</div><div class="desc">排涝泵站需求集中释放</div></div><div class="logic-card"><div class="title">3 水利工程</div><div class="desc">中国电建订单充足</div></div><div class="logic-card"><div class="title">4 专项债</div><div class="desc">地方政府灾后重建专项债</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
+            <td><a href="javascript:void(0)" onclick="openReport('深度分析_600519_贵州茅台_v8_TOP1.html')" data-filename="深度分析_600519_贵州茅台_v8_TOP1.html" target="_blank">查看</a></td></tr></tbody></table></div></section></div><div class="tab-pane" id="tab-26"><section class="logic-section"><h2><span class="num">IND</span>水利设施修复与排涝</h2><p class="thesis">洪灾后堤防/管网/泵站修复</p><div class="logic-grid"><div class="logic-card"><div class="title">1 管材需求</div><div class="desc">城市供排水管网修复加海绵城市</div></div><div class="logic-card"><div class="title">2 水泵需求</div><div class="desc">排涝泵站需求集中释放</div></div><div class="logic-card"><div class="title">3 水利工程</div><div class="desc">中国电建订单充足</div></div><div class="logic-card"><div class="title">4 专项债</div><div class="desc">地方政府灾后重建专项债</div></div></div></section><section><h2><span class="num">TOP</span>推荐 · 点击股票查看深度分析 (有 ✓ 标记的已生成独立报告)</h2><div class="stock-grid"><div class="score-card">
       <div class="score-card-header">
         <span class="rank-badge">#1</span>
         <span class="name-strong">新兴铸管 ✓</span>
@@ -12567,7 +12757,7 @@
 </section>
 
 <footer>
-  报告生成: 2026-09-09T12:02:00.855336 · 数据基于最新财报与 2026-09-09 行情 · 仅供研究参考<br>
+  报告生成: 2026-09-09T16:01:44.717586 · 数据基于最新财报与 2026-09-09 行情 · 仅供研究参考<br>
   24 行业主题 · 106 只精选股 · 106 份独立深度报告已内嵌
 </footer>
 </div>
@@ -12858,6 +13048,45 @@ function filterAllStocks() {
   if (countEl) countEl.textContent = visibleCount + ' 只';
   const totalEl = document.getElementById('totalCountDisplay');
   if (totalEl) totalEl.textContent = visibleCount;
+}
+
+// ===== 我的交易：录入 =====
+function submitTrade() {
+  const msg = document.getElementById('tradeMsg');
+  msg.className = 'trade-form-msg';
+  const payload = {
+    trade_date: document.getElementById('t_date').value,
+    code: document.getElementById('t_code').value.trim(),
+    name: document.getElementById('t_name').value.trim(),
+    side: document.getElementById('t_side').value,
+    price: document.getElementById('t_price').value,
+    shares: document.getElementById('t_shares').value,
+    amount: document.getElementById('t_amount').value,
+    notes: document.getElementById('t_notes').value.trim(),
+  };
+  if (!payload.trade_date || !payload.code || !payload.name || !payload.price || !payload.shares) {
+    msg.className = 'trade-form-msg err';
+    msg.textContent = '请填全日期/代码/名称/价格/数量';
+    return;
+  }
+  msg.textContent = '保存中...';
+  fetch(UPDATE_API + '/trade', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(payload),
+  }).then(r => r.json()).then(res => {
+    if (res.ok) {
+      msg.className = 'trade-form-msg ok';
+      msg.textContent = '✅ 已保存，正在刷新...';
+      setTimeout(function() { location.reload(); }, 800);
+    } else {
+      msg.className = 'trade-form-msg err';
+      msg.textContent = '『' + (res.msg || '保存失败') + '』';
+    }
+  }).catch(function(e) {
+    msg.className = 'trade-form-msg err';
+    msg.textContent = '无法连接本地服务 (8721)，请确认后台已启动。';
+  });
 }
 </script>
 
