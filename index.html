@@ -12888,7 +12888,7 @@ async function pollStatus() {
       const btn = document.getElementById('updateBtn');
       btn.disabled = true;
       btn.title = '在线模式下不可用，请在本地打开 index.html';
-      setStatus('📡 在线模式 · <a href="javascript:void(0)" onclick="location.href=location.href.replace('https://','http://')" style="color:#3b82f6">点击切换到本地 HTTP</a> 或在本地双击打开 index.html 使用更新功能', 'error');
+      setStatus(`📡 在线模式 · <a href="javascript:void(0)" onclick="location.href=location.href.replace('https://','http://')" style="color:#3b82f6">点击切换到本地 HTTP</a> 或在本地双击打开 index.html 使用更新功能`, 'error');
     } else {
       setStatus('⚠️ 无法连接本地更新服务 (端口 8721) · 请确认 update_api_server.py 已运行', 'error');
     }
