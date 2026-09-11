@@ -371,28 +371,28 @@
   <h2>📊 我的投资组合</h2>
   
     <div class="portfolio-dashboard" id="portfolioDashboard">
-      <div class="pd-card"><div class="pd-label">💰 总投入</div><div class="pd-value">¥17,104.00</div></div>
-      <div class="pd-card"><div class="pd-label">📊 当前市值</div><div class="pd-value">¥16,824.00</div></div>
+      <div class="pd-card"><div class="pd-label">💰 总投入</div><div class="pd-value">¥19,204.00</div></div>
+      <div class="pd-card"><div class="pd-label">📊 当前市值</div><div class="pd-value">¥18,927.00</div></div>
       <div class="pd-card pd-pnl" style="border-color:#f43f5e40;">
         <div class="pd-label">📉 浮动盈亏</div>
-        <div class="pd-value" style="color:#f43f5e;">¥-280.00</div>
-        <div class="pd-sub" style="color:#f43f5e;">-1.64%</div>
+        <div class="pd-value" style="color:#f43f5e;">¥-277.00</div>
+        <div class="pd-sub" style="color:#f43f5e;">-1.44%</div>
       </div>
       <div class="pd-card"><div class="pd-label">📦 持仓数量</div><div class="pd-value">1 只</div></div>
-      <div class="pd-card"><div class="pd-label">🧾 累计交易</div><div class="pd-value">10 笔</div></div>
+      <div class="pd-card"><div class="pd-label">🧾 累计交易</div><div class="pd-value">11 笔</div></div>
     </div>
 </section>
 <section>
   <h2>📌 当前持仓 <span class="rating-count">1 只</span></h2>
   <div class="pos-grid" id="posGrid">
             <div class="pos-card" style="border-color:#f43f5e30;">
-              <div class="pos-name">海尔智家 <span class="pos-code">600690</span></div>
-              <div class="pos-shares">800 <span style="font-size:12px;color:#64748b;">股</span></div>
-              <div class="pos-row"><span>买入均价</span><b>21.3800</b></div>
+              <div class="pos-name">???? <span class="pos-code">600690</span></div>
+              <div class="pos-shares">900 <span style="font-size:12px;color:#64748b;">股</span></div>
+              <div class="pos-row"><span>买入均价</span><b>21.3378</b></div>
               <div class="pos-row"><span>最新价</span><b>21.0300</b></div>
-              <div class="pos-row"><span>成本</span><b>¥17,104.00</b></div>
-              <div class="pos-row"><span>市值</span><b>¥16,824.00</b></div>
-              <div class="pos-pnl" style="color:#f43f5e;">📉 -280.00 (-1.64%)</div>
+              <div class="pos-row"><span>成本</span><b>¥19,204.00</b></div>
+              <div class="pos-row"><span>市值</span><b>¥18,927.00</b></div>
+              <div class="pos-pnl" style="color:#f43f5e;">📉 -277.00 (-1.44%)</div>
             </div></div>
 </section>
 <section class="debate-section"><h3>🎭 持仓多空辩论 <span class="rating-count">1 只</span></h3>
@@ -479,7 +479,7 @@
   <form class="trade-form" id="tradeForm">
     <div class="tf-row">
       <label>日期<input type="date" id="t_date" required></label>
-      <label>代码<input type="text" id="t_code" placeholder="600690" required></label>
+      <label>代码<input type="text" id="t_code" placeholder="600690" required oninput="autoFillName(this.value)"></label>
       <label>名称<input type="text" id="t_name" placeholder="海尔智家" required></label>
       <label>方向
         <select id="t_side">
@@ -501,12 +501,21 @@
   </form>
 </section>
 <section>
-  <h2>📋 交易流水 <span class="rating-count">10 笔</span></h2>
+  <h2>📋 交易流水 <span class="rating-count">11 笔</span></h2>
   
         <div class="table-wrap" id="tradeTableWrap">
           <table class="trade-table">
             <thead><tr><th>日期</th><th>股票</th><th>方向</th><th>价格</th><th>数量</th><th>金额</th><th>备注</th></tr></thead>
             <tbody>
+            <tr>
+              <td>2026-09-11</td>
+              <td class="td-name">????<span class="td-code">600690</span></td>
+              <td><span class="side-badge" style="color:#10b981;background:#10b9811f;">买入</span></td>
+              <td class="td-r">21.0000</td>
+              <td class="td-r">100</td>
+              <td class="td-r">¥2,100.00</td>
+              <td><span class="trade-note">??</span></td>
+            </tr>
             <tr>
               <td>2026-09-09</td>
               <td class="td-name">海尔智家<span class="td-code">600690</span></td>
@@ -13090,6 +13099,132 @@ document.addEventListener('DOMContentLoaded', () => {
   // 动态加载最新交易数据（本地模式）
   loadTrades();
 });
+
+// ===== 股票代码自动带名称 =====
+const STOCK_NAME_MAP = {
+  "000902": "新洋丰",
+  "600486": "扬农化工",
+  "002258": "利尔化学",
+  "002539": "云图控股",
+  "688256": "寒武纪",
+  "300033": "同花顺",
+  "002230": "科大讯飞",
+  "600570": "恒生电子",
+  "300674": "宇信科技",
+  "300253": "卫宁健康",
+  "600588": "用友网络",
+  "000729": "燕京啤酒",
+  "605499": "东鹏饮料",
+  "600600": "青岛啤酒",
+  "600132": "重庆啤酒",
+  "300760": "迈瑞医疗",
+  "603187": "海容冷链",
+  "002352": "顺丰控股",
+  "000811": "冰轮环境",
+  "300021": "大禹节水",
+  "830964": "润农节水",
+  "002457": "青龙管业",
+  "600075": "新疆天业",
+  "002223": "鱼跃医疗",
+  "300888": "稳健医疗",
+  "600332": "白云山",
+  "600789": "鲁抗医药",
+  "600129": "太极集团",
+  "002507": "涪陵榨菜",
+  "600887": "伊利股份",
+  "002216": "三全食品",
+  "002661": "克明食品",
+  "601311": "骆驼股份",
+  "603109": "神驰机电",
+  "001696": "宗申动力",
+  "603195": "公牛集团",
+  "300068": "南都电源",
+  "002884": "凌霄泵业",
+  "603757": "大元泵业",
+  "002131": "利欧股份",
+  "300526": "中潜股份",
+  "601718": "际华集团",
+  "000598": "兴蓉环境",
+  "603200": "上海洗霸",
+  "300801": "泰和科技",
+  "300437": "清水源",
+  "300070": "碧水源",
+  "600513": "联环药业",
+  "000682": "东方电子",
+  "002028": "思源电气",
+  "600406": "国电南瑞",
+  "688676": "金盘科技",
+  "600089": "特变电工",
+  "000400": "许继电气",
+  "600690": "海尔智家",
+  "000333": "美的集团",
+  "002050": "三花智控",
+  "002011": "盾安环境",
+  "000651": "格力电器",
+  "002705": "新宝股份",
+  "002508": "老板电器",
+  "002032": "苏泊尔",
+  "002959": "小熊电器",
+  "000921": "海信家电",
+  "002242": "九阳股份",
+  "601319": "中国人保",
+  "601601": "中国太保",
+  "601318": "中国平安",
+  "600031": "三一重工",
+  "600585": "海螺水泥",
+  "000425": "徐工机械",
+  "600801": "华新水泥",
+  "000157": "中联重科",
+  "000528": "柳工",
+  "002372": "伟星新材",
+  "002271": "东方雨虹",
+  "300750": "宁德时代",
+  "002594": "比亚迪",
+  "002318": "久立特材",
+  "002438": "江苏神通",
+  "601985": "中国核电",
+  "003816": "中国广核",
+  "000777": "中核科技",
+  "002366": "融发核电",
+  "002603": "以岭药业",
+  "600085": "同仁堂",
+  "600312": "平高电气",
+  "600011": "华能国际",
+  "600795": "国电电力",
+  "603379": "三美股份",
+  "600160": "巨化股份",
+  "605020": "永和股份",
+  "600378": "昊华科技",
+  "002041": "登海种业",
+  "002385": "大北农",
+  "000998": "隆平高科",
+  "300087": "荃银高科",
+  "688981": "中芯国际",
+  "600519": "贵州茅台",
+  "000778": "新兴铸管",
+  "002671": "龙泉股份",
+  "601669": "中国电建",
+  "002060": "粤水电",
+  "600502": "安徽建工",
+  "601868": "中国能建",
+  "002205": "国统股份",
+};
+
+function autoFillName(code) {
+  const val = code.trim();
+  const nameInput = document.getElementById('t_name');
+  if (val && STOCK_NAME_MAP[val]) {
+    nameInput.value = STOCK_NAME_MAP[val];
+    nameInput.style.color = '#10b981';
+  } else if (val.length >= 6) {
+    nameInput.value = '';
+    nameInput.placeholder = '未找到，请手动输入';
+    nameInput.style.color = '';
+  } else {
+    nameInput.value = '';
+    nameInput.style.color = '';
+  }
+}
 function toggleDetail(code, event) {
   event.stopPropagation();
   const panel = document.getElementById('detail-' + code);
@@ -13324,7 +13459,11 @@ function submitTrade() {
     }
   }).catch(function(e) {
     msg.className = 'trade-form-msg err';
-    msg.textContent = '无法连接本地服务 (8721)，请确认后台已启动。';
+    if (IS_HTTPS) {
+      msg.textContent = '在线模式无法保存。请在本地双击打开 index.html 后操作。';
+    } else {
+      msg.textContent = '无法连接本地服务 (8721)。请运行 update_api_server.py，或在本地双击打开 index.html。';
+    }
   });
 }
 </script>
