@@ -379,28 +379,28 @@
   <h2>📊 我的投资组合</h2>
   
     <div class="portfolio-dashboard" id="portfolioDashboard">
-      <div class="pd-card"><div class="pd-label">💰 总投入</div><div class="pd-value">¥19,204.00</div></div>
-      <div class="pd-card"><div class="pd-label">📊 当前市值</div><div class="pd-value">¥18,927.00</div></div>
+      <div class="pd-card"><div class="pd-label">💰 总投入</div><div class="pd-value">¥17,104.00</div></div>
+      <div class="pd-card"><div class="pd-label">📊 当前市值</div><div class="pd-value">¥16,824.00</div></div>
       <div class="pd-card pd-pnl" style="border-color:#f43f5e40;">
         <div class="pd-label">📉 浮动盈亏</div>
-        <div class="pd-value" style="color:#f43f5e;">¥-277.00</div>
-        <div class="pd-sub" style="color:#f43f5e;">-1.44%</div>
+        <div class="pd-value" style="color:#f43f5e;">¥-280.00</div>
+        <div class="pd-sub" style="color:#f43f5e;">-1.64%</div>
       </div>
       <div class="pd-card"><div class="pd-label">📦 持仓数量</div><div class="pd-value">1 只</div></div>
-      <div class="pd-card"><div class="pd-label">🧾 累计交易</div><div class="pd-value">11 笔</div></div>
+      <div class="pd-card"><div class="pd-label">🧾 累计交易</div><div class="pd-value">10 笔</div></div>
     </div>
 </section>
 <section>
   <h2>📌 当前持仓 <span class="rating-count">1 只</span></h2>
   <div class="pos-grid" id="posGrid">
             <div class="pos-card" style="border-color:#f43f5e30;">
-              <div class="pos-name">???? <span class="pos-code">600690</span></div>
-              <div class="pos-shares">900 <span style="font-size:12px;color:#64748b;">股</span></div>
-              <div class="pos-row"><span>买入均价</span><b>21.3378</b></div>
+              <div class="pos-name">海尔智家 <span class="pos-code">600690</span></div>
+              <div class="pos-shares">800 <span style="font-size:12px;color:#64748b;">股</span></div>
+              <div class="pos-row"><span>买入均价</span><b>21.3800</b></div>
               <div class="pos-row"><span>最新价</span><b>21.0300</b></div>
-              <div class="pos-row"><span>成本</span><b>¥19,204.00</b></div>
-              <div class="pos-row"><span>市值</span><b>¥18,927.00</b></div>
-              <div class="pos-pnl" style="color:#f43f5e;">📉 -277.00 (-1.44%)</div>
+              <div class="pos-row"><span>成本</span><b>¥17,104.00</b></div>
+              <div class="pos-row"><span>市值</span><b>¥16,824.00</b></div>
+              <div class="pos-pnl" style="color:#f43f5e;">📉 -280.00 (-1.64%)</div>
             </div></div>
 </section>
 <section class="debate-section"><h3>🎭 持仓多空辩论 <span class="rating-count">1 只</span></h3>
@@ -509,22 +509,12 @@
   </form>
 </section>
 <section>
-  <h2>📋 交易流水 <span class="rating-count">11 笔</span></h2>
+  <h2>📋 交易流水 <span class="rating-count">10 笔</span></h2>
   
         <div class="table-wrap" id="tradeTableWrap">
           <table class="trade-table">
             <thead><tr><th>日期</th><th>股票</th><th>方向</th><th>价格</th><th>数量</th><th>金额</th><th>备注</th><th>操作</th></tr></thead>
             <tbody>
-            <tr data-trade-id="14">
-              <td>2026-09-11</td>
-              <td class="td-name">????<span class="td-code">600690</span></td>
-              <td><span class="side-badge" style="color:#10b981;background:#10b9811f;">买入</span></td>
-              <td class="td-r">21.0000</td>
-              <td class="td-r">100</td>
-              <td class="td-r">¥2,100.00</td>
-              <td><span class="trade-note">??</span></td>
-              <td class="td-actions"><button class="trade-edit-btn" onclick="editTrade(14)">✏️</button><button class="trade-del-btn" onclick="deleteTrade(14)">🗑️</button></td>
-            </tr>
             <tr data-trade-id="1">
               <td>2026-09-09</td>
               <td class="td-name">海尔智家<span class="td-code">600690</span></td>
@@ -13492,18 +13482,20 @@ let _editingTradeId = null;
 function editTrade(id) {
   // 从表格行回填表单
   const row = document.querySelector('tr[data-trade-id="' + id + '"]');
-  if (!row) return;
+  if (!row) {
+    alert('找不到交易记录 (id=' + id + ')，可能数据已更新，请刷新页面');
+    return;
+  }
   const cells = row.querySelectorAll('td');
-  const date = cells[0]?.textContent?.trim() || '';
-  const nameEl = cells[1]?.querySelector('.td-name') || cells[1];
-  const name = cells[1]?.querySelector('.td-code') ? cells[1]?.firstChild?.textContent?.trim() : cells[1]?.textContent?.trim() || '';
-  const code = cells[1]?.querySelector('.td-code')?.textContent?.trim() || '';
-  const sideText = cells[2]?.textContent?.trim() || '';
-  const side = sideText === '卖出' ? 'SELL' : 'BUY';
-  const price = cells[3]?.textContent?.trim() || '';
-  const shares = cells[4]?.textContent?.replace(/,/g, '').trim() || '';
-  const amount = cells[5]?.textContent?.replace(/[¥,]/g, '').trim() || '';
-  const notes = cells[6]?.textContent?.trim() || '';
+  const date = (cells[0] ? cells[0].textContent : '').trim();
+  const code = cells[1] && cells[1].querySelector('.td-code') ? cells[1].querySelector('.td-code').textContent.trim() : '';
+  const name = cells[1] && cells[1].querySelector('.td-code') ? cells[1].firstChild.textContent.trim() : (cells[1] ? cells[1].textContent.trim() : '');
+  const sideText = (cells[2] ? cells[2].textContent : '').trim();
+  const side = sideText.indexOf('卖') >= 0 ? 'SELL' : 'BUY';
+  const price = (cells[3] ? cells[3].textContent : '').trim();
+  const shares = (cells[4] ? cells[4].textContent : '').replace(/,/g, '').trim();
+  const amount = (cells[5] ? cells[5].textContent : '').replace(/[¥,]/g, '').trim();
+  const notes = (cells[6] ? cells[6].textContent : '').trim();
 
   document.getElementById('t_date').value = date;
   document.getElementById('t_code').value = code;
@@ -13574,7 +13566,10 @@ function submitEdit() {
 // ===== 我的交易：删除 =====
 function deleteTrade(id) {
   const row = document.querySelector('tr[data-trade-id="' + id + '"]');
-  if (!row) return;
+  if (!row) {
+    alert('找不到交易记录 (id=' + id + ')，可能数据已更新，请刷新页面');
+    return;
+  }
   const name = row.querySelector('.td-code') ? row.cells[1].firstChild.textContent.trim() : row.cells[1].textContent.trim();
   const date = row.cells[0].textContent.trim();
   if (!confirm('确认删除这条记录？
