@@ -209,6 +209,44 @@
   .pos-row { display: flex; justify-content: space-between; font-size: 12px; color: #94a3b8; padding: 2px 0; }
   .pos-row b { color: #e2e8f0; }
   .pos-pnl { margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(148, 163, 184, 0.15); font-size: 14px; font-weight: 800; text-align: center; }
+
+  /* ===== 持仓多空辩论 ===== */
+  .debate-section { margin-top: 20px; }
+  .debate-section h3 { font-size: 16px; font-weight: 800; color: #f8fafc; margin: 0 0 12px; display: flex; align-items: center; gap: 8px; }
+  .debate-stock { background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(148, 163, 184, 0.15); border-radius: 14px; padding: 16px 18px; margin-bottom: 16px; }
+  .debate-stock-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; padding-bottom: 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.15); margin-bottom: 14px; }
+  .dsh-name { font-size: 16px; font-weight: 800; color: #f8fafc; }
+  .dsh-code { font-size: 12px; color: #64748b; margin-left: 6px; }
+  .dsh-shares { font-size: 12px; color: #94a3b8; margin-left: 8px; }
+  .dsh-price { font-size: 13px; color: #e2e8f0; }
+  .dsh-price b { font-size: 16px; color: #f9a8d4; }
+  .dsh-pnl { font-size: 13px; font-weight: 700; }
+  .debate-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+  .debate-card { background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(148, 163, 184, 0.12); border-radius: 10px; padding: 12px 14px; }
+  .debate-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .debate-emoji { font-size: 18px; }
+  .debate-name { font-size: 13px; font-weight: 700; color: #e2e8f0; flex: 1; }
+  .debate-verdict { font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 6px; }
+  .debate-summary { font-size: 11px; color: #94a3b8; font-style: italic; margin-bottom: 6px; }
+  .debate-confidence { font-size: 10px; color: #64748b; margin-bottom: 6px; }
+  .debate-confidence::before { content: "▓"; color: #3b82f6; }
+  .debate-reasons { list-style: none; padding: 0; margin: 0; }
+  .debate-reasons li { font-size: 11px; color: #cbd5e1; padding: 3px 0 3px 12px; position: relative; }
+  .debate-reasons li::before { content: "▸"; color: #64748b; position: absolute; left: 0; }
+  .debate-consensus { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(148, 163, 184, 0.15); }
+  .consensus-left { display: flex; flex-direction: column; gap: 6px; }
+  .consensus-title { font-size: 13px; font-weight: 700; color: #e2e8f0; margin-bottom: 4px; }
+  .vote-bar { display: flex; align-items: center; gap: 8px; }
+  .vote-label { font-size: 11px; width: 36px; color: #94a3b8; }
+  .vote-bar-bg { flex: 1; height: 16px; background: rgba(30, 41, 59, 0.6); border-radius: 8px; overflow: hidden; }
+  .vote-bar-fill { height: 100%; border-radius: 8px; transition: width 0.5s; }
+  .vote-count { font-size: 11px; color: #64748b; width: 30px; }
+  .consensus-right { background: rgba(30, 41, 59, 0.5); border: 2px solid; border-radius: 10px; padding: 12px 16px; text-align: center; }
+  .consensus-label { font-size: 11px; color: #94a3b8; }
+  .consensus-verdict { font-size: 22px; font-weight: 900; margin: 4px 0; }
+  .consensus-score { font-size: 11px; color: #64748b; }
+  .consensus-note { font-size: 11px; color: #94a3b8; margin-top: 6px; line-height: 1.4; }
+  @media (max-width: 768px) { .debate-consensus { grid-template-columns: 1fr; } .debate-grid { grid-template-columns: 1fr; } }
   .trade-empty { background: rgba(15, 23, 42, 0.5); border: 1px dashed rgba(148, 163, 184, 0.3); border-radius: 10px; padding: 24px 18px; text-align: center; color: #94a3b8; font-size: 13px; margin-top: 12px; }
   .trade-form { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(148, 163, 184, 0.15); border-radius: 12px; padding: 16px; margin-top: 12px; }
   .tf-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
@@ -357,6 +395,85 @@
               <div class="pos-pnl" style="color:#f43f5e;">📉 -280.00 (-1.64%)</div>
             </div></div>
 </section>
+<section class="debate-section"><h3>🎭 持仓多空辩论 <span class="rating-count">1 只</span></h3>
+  <div class="debate-stock" id="debate-600690">
+    <div class="debate-stock-header">
+      <div class="dsh-left">
+        <span class="dsh-name">海尔智家</span>
+        <span class="dsh-code">600690</span>
+        <span class="dsh-shares">800 股 @ 21.38</span>
+      </div>
+      <div class="dsh-right">
+        <span class="dsh-price">现价 <b>21.03</b></span>
+        <span class="dsh-pnl" style="color:#f43f5e;">盈亏 -280.00 (-1.6%)</span>
+      </div>
+    </div>
+
+    <div class="debate-grid">
+        <div class="debate-card" style="border-top:3px solid #10b981;">
+          <div class="debate-header">
+            <span class="debate-emoji">🐂</span>
+            <span class="debate-name">多头司令</span>
+            <span class="debate-verdict" style="background:#10b9811f;color:#10b981;">买入</span>
+          </div>
+          <div class="debate-summary">成长与催化并重，看好上行空间</div>
+          <div class="debate-confidence">信心度: 90%</div>
+          <ul class="debate-reasons"><li>营收同比增长 10.2%，成长性突出</li><li>净利润同比增长 15.9%，盈利加速</li><li>催化因素: 1）卡萨帝高端品牌持续放量；2）海外品牌矩阵深化；3）数字化提效</li><li>当前价 21.03 低于成本 21.38，处于浮亏有反弹空间</li></ul>
+        </div>
+        <div class="debate-card" style="border-top:3px solid #10b981;">
+          <div class="debate-header">
+            <span class="debate-emoji">🐻</span>
+            <span class="debate-name">空头将军</span>
+            <span class="debate-verdict" style="background:#10b9811f;color:#10b981;">买入</span>
+          </div>
+          <div class="debate-summary">警惕估值与风险，防守为先</div>
+          <div class="debate-confidence">信心度: 30%</div>
+          <ul class="debate-reasons"><li>资产负债率 59.4%，需关注</li><li>风险提示: 1）短期业绩承压（净利 -14.3%）；2）海外宏观波动；3）人民币升值压缩出口毛利</li></ul>
+        </div>
+        <div class="debate-card" style="border-top:3px solid #f59e0b;">
+          <div class="debate-header">
+            <span class="debate-emoji">💰</span>
+            <span class="debate-name">价值管家</span>
+            <span class="debate-verdict" style="background:#f59e0b1f;color:#f59e0b;">持有</span>
+          </div>
+          <div class="debate-summary">以估值为尺，量安全边际</div>
+          <div class="debate-confidence">信心度: 45%</div>
+          <ul class="debate-reasons"><li>PE 11.0 倍，低估</li><li>ROE 10.3%，尚可</li></ul>
+        </div>
+        <div class="debate-card" style="border-top:3px solid #f59e0b;">
+          <div class="debate-header">
+            <span class="debate-emoji">📈</span>
+            <span class="debate-name">技术军师</span>
+            <span class="debate-verdict" style="background:#f59e0b1f;color:#f59e0b;">持有</span>
+          </div>
+          <div class="debate-summary">以量价为本，判进退之机</div>
+          <div class="debate-confidence">信心度: 20%</div>
+          <ul class="debate-reasons"><li>今日涨跌 -0.66%，短期偏弱</li><li>当前 21.03 在买入区间 [20.56-21.76]</li></ul>
+        </div>
+        <div class="debate-card" style="border-top:3px solid #10b981;">
+          <div class="debate-header">
+            <span class="debate-emoji">⚖️</span>
+            <span class="debate-name">风控总监</span>
+            <span class="debate-verdict" style="background:#10b9811f;color:#10b981;">买入</span>
+          </div>
+          <div class="debate-summary">控制下行，方能有上行</div>
+          <div class="debate-confidence">信心度: 0%</div>
+          <ul class="debate-reasons"><li>持仓 800 股，成本 21.38，建议设止损位 -8% 约 19.67</li></ul>
+        </div></div>
+
+    <div class="debate-consensus">
+      <div class="consensus-left">
+        <div class="consensus-title">📋 投票结果</div>
+        <div class="vote-bar"><span class="vote-label">买入</span><div class="vote-bar-bg"><div class="vote-bar-fill" style="width:60.0%;background:#10b981;"></div></div><span class="vote-count">3/5</span></div><div class="vote-bar"><span class="vote-label">持有</span><div class="vote-bar-bg"><div class="vote-bar-fill" style="width:40.0%;background:#f59e0b;"></div></div><span class="vote-count">2/5</span></div><div class="vote-bar"><span class="vote-label">卖出</span><div class="vote-bar-bg"><div class="vote-bar-fill" style="width:0%;background:#f43f5e;"></div></div><span class="vote-count">0/5</span></div>
+      </div>
+      <div class="consensus-right" style="border-color:#10b981;">
+        <div class="consensus-label">综合建议</div>
+        <div class="consensus-verdict" style="color:#10b981;">加仓 / 持有</div>
+        <div class="consensus-score">综合评分: +0.65 (-1~+1)</div>
+        <div class="consensus-note">多数分析师看好，可考虑加仓或继续持有</div>
+      </div>
+    </div>
+  </div></section>
 <section>
   <h2>🧾 加一笔交易</h2>
   <form class="trade-form" id="tradeForm">
@@ -12757,7 +12874,7 @@
 </section>
 
 <footer>
-  报告生成: 2026-09-11T10:07:54.935291 · 数据基于最新财报与 2026-09-11 行情 · 仅供研究参考<br>
+  报告生成: 2026-09-11T10:34:35.148796 · 数据基于最新财报与 2026-09-11 行情 · 仅供研究参考<br>
   24 行业主题 · 106 只精选股 · 106 份独立深度报告已内嵌
 </footer>
 </div>
