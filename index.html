@@ -260,6 +260,14 @@
   .trade-table .td-name { font-weight: 600; }
   .trade-table .td-code { display: block; font-size: 10px; color: #94a3b8; font-weight: 400; }
   .trade-table .td-r { text-align: right; color: #f8fafc; }
+  .trade-table .td-actions { white-space: nowrap; }
+  .trade-edit-btn, .trade-del-btn {
+    background: transparent; border: 1px solid #334155; border-radius: 4px;
+    cursor: pointer; font-size: 13px; padding: 2px 5px; margin: 0 1px;
+    transition: all .15s;
+  }
+  .trade-edit-btn:hover { border-color: #3b82f6; background: #1e293b; }
+  .trade-del-btn:hover { border-color: #f43f5e; background: #1e293b; }
   .side-badge { display: inline-block; padding: 1px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; }
   .trade-note { font-size: 11px; color: #94a3b8; }
 
@@ -496,7 +504,7 @@
     </div>
     <div class="tf-actions">
       <span class="trade-form-msg" id="tradeMsg"></span>
-      <button type="button" class="update-btn" onclick="submitTrade()">📥 保存这笔交易</button>
+      <button type="button" class="update-btn" id="tradeSubmitBtn" onclick="submitTrade()">📥 保存这笔交易</button>
     </div>
   </form>
 </section>
@@ -505,9 +513,9 @@
   
         <div class="table-wrap" id="tradeTableWrap">
           <table class="trade-table">
-            <thead><tr><th>日期</th><th>股票</th><th>方向</th><th>价格</th><th>数量</th><th>金额</th><th>备注</th></tr></thead>
+            <thead><tr><th>日期</th><th>股票</th><th>方向</th><th>价格</th><th>数量</th><th>金额</th><th>备注</th><th>操作</th></tr></thead>
             <tbody>
-            <tr>
+            <tr data-trade-id="14">
               <td>2026-09-11</td>
               <td class="td-name">????<span class="td-code">600690</span></td>
               <td><span class="side-badge" style="color:#10b981;background:#10b9811f;">买入</span></td>
@@ -515,8 +523,9 @@
               <td class="td-r">100</td>
               <td class="td-r">¥2,100.00</td>
               <td><span class="trade-note">??</span></td>
+              <td class="td-actions"><button class="trade-edit-btn" onclick="editTrade(14)">✏️</button><button class="trade-del-btn" onclick="deleteTrade(14)">🗑️</button></td>
             </tr>
-            <tr>
+            <tr data-trade-id="1">
               <td>2026-09-09</td>
               <td class="td-name">海尔智家<span class="td-code">600690</span></td>
               <td><span class="side-badge" style="color:#10b981;background:#10b9811f;">买入</span></td>
@@ -524,8 +533,9 @@
               <td class="td-r">800</td>
               <td class="td-r">¥17,104.00</td>
               <td></td>
+              <td class="td-actions"><button class="trade-edit-btn" onclick="editTrade(1)">✏️</button><button class="trade-del-btn" onclick="deleteTrade(1)">🗑️</button></td>
             </tr>
-            <tr>
+            <tr data-trade-id="2">
               <td>2026-09-07</td>
               <td class="td-name">中天科技<span class="td-code">600522</span></td>
               <td><span class="side-badge" style="color:#f43f5e;background:#f43f5e1f;">卖出</span></td>
@@ -533,8 +543,9 @@
               <td class="td-r">100</td>
               <td class="td-r">¥3,247.00</td>
               <td></td>
+              <td class="td-actions"><button class="trade-edit-btn" onclick="editTrade(2)">✏️</button><button class="trade-del-btn" onclick="deleteTrade(2)">🗑️</button></td>
             </tr>
-            <tr>
+            <tr data-trade-id="3">
               <td>2026-09-04</td>
               <td class="td-name">红利低波ETF华泰柏瑞<span class="td-code">512890</span></td>
               <td><span class="side-badge" style="color:#f43f5e;background:#f43f5e1f;">卖出</span></td>
@@ -542,8 +553,9 @@
               <td class="td-r">5,100</td>
               <td class="td-r">¥6,155.70</td>
               <td></td>
+              <td class="td-actions"><button class="trade-edit-btn" onclick="editTrade(3)">✏️</button><button class="trade-del-btn" onclick="deleteTrade(3)">🗑️</button></td>
             </tr>
-            <tr>
+            <tr data-trade-id="6">
               <td>2026-09-01</td>
               <td class="td-name">红利低波ETF华泰柏瑞<span class="td-code">512890</span></td>
               <td><span class="side-badge" style="color:#f43f5e;background:#f43f5e1f;">卖出</span></td>
@@ -551,8 +563,9 @@
               <td class="td-r">10,100</td>
               <td class="td-r">¥12,190.70</td>
               <td><span class="trade-note">从照片录入</span></td>
+              <td class="td-actions"><button class="trade-edit-btn" onclick="editTrade(6)">✏️</button><button class="trade-del-btn" onclick="deleteTrade(6)">🗑️</button></td>
             </tr>
-            <tr>
+            <tr data-trade-id="5">
               <td>2026-09-01</td>
               <td class="td-name">红利低波ETF华泰柏瑞<span class="td-code">512890</span></td>
               <td><span class="side-badge" style="color:#f43f5e;background:#f43f5e1f;">卖出</span></td>
@@ -560,8 +573,9 @@
               <td class="td-r">5,000</td>
               <td class="td-r">¥6,030.00</td>
               <td><span class="trade-note">从照片录入</span></td>
+              <td class="td-actions"><button class="trade-edit-btn" onclick="editTrade(5)">✏️</button><button class="trade-del-btn" onclick="deleteTrade(5)">🗑️</button></td>
             </tr>
-            <tr>
+            <tr data-trade-id="4">
               <td>2026-09-01</td>
               <td class="td-name">红利低波ETF华泰柏瑞<span class="td-code">512890</span></td>
               <td><span class="side-badge" style="color:#f43f5e;background:#f43f5e1f;">卖出</span></td>
@@ -569,8 +583,9 @@
               <td class="td-r">10,000</td>
               <td class="td-r">¥12,050.00</td>
               <td><span class="trade-note">从照片录入</span></td>
+              <td class="td-actions"><button class="trade-edit-btn" onclick="editTrade(4)">✏️</button><button class="trade-del-btn" onclick="deleteTrade(4)">🗑️</button></td>
             </tr>
-            <tr>
+            <tr data-trade-id="7">
               <td>2026-08-13</td>
               <td class="td-name">中天科技<span class="td-code">600522</span></td>
               <td><span class="side-badge" style="color:#10b981;background:#10b9811f;">买入</span></td>
@@ -578,8 +593,9 @@
               <td class="td-r">100</td>
               <td class="td-r">¥3,399.00</td>
               <td><span class="trade-note">从照片录入</span></td>
+              <td class="td-actions"><button class="trade-edit-btn" onclick="editTrade(7)">✏️</button><button class="trade-del-btn" onclick="deleteTrade(7)">🗑️</button></td>
             </tr>
-            <tr>
+            <tr data-trade-id="8">
               <td>2026-08-12</td>
               <td class="td-name">红利低波ETF华泰柏瑞<span class="td-code">512890</span></td>
               <td><span class="side-badge" style="color:#10b981;background:#10b9811f;">买入</span></td>
@@ -587,8 +603,9 @@
               <td class="td-r">12,900</td>
               <td class="td-r">¥14,951.10</td>
               <td><span class="trade-note">从照片录入</span></td>
+              <td class="td-actions"><button class="trade-edit-btn" onclick="editTrade(8)">✏️</button><button class="trade-del-btn" onclick="deleteTrade(8)">🗑️</button></td>
             </tr>
-            <tr>
+            <tr data-trade-id="10">
               <td>2026-08-07</td>
               <td class="td-name">红利低波ETF华泰柏瑞<span class="td-code">512890</span></td>
               <td><span class="side-badge" style="color:#10b981;background:#10b9811f;">买入</span></td>
@@ -596,8 +613,9 @@
               <td class="td-r">13,000</td>
               <td class="td-r">¥15,067.00</td>
               <td><span class="trade-note">从照片录入</span></td>
+              <td class="td-actions"><button class="trade-edit-btn" onclick="editTrade(10)">✏️</button><button class="trade-del-btn" onclick="deleteTrade(10)">🗑️</button></td>
             </tr>
-            <tr>
+            <tr data-trade-id="9">
               <td>2026-08-07</td>
               <td class="td-name">红利低波ETF华泰柏瑞<span class="td-code">512890</span></td>
               <td><span class="side-badge" style="color:#10b981;background:#10b9811f;">买入</span></td>
@@ -605,6 +623,7 @@
               <td class="td-r">4,300</td>
               <td class="td-r">¥4,983.70</td>
               <td><span class="trade-note">从照片录入</span></td>
+              <td class="td-actions"><button class="trade-edit-btn" onclick="editTrade(9)">✏️</button><button class="trade-del-btn" onclick="deleteTrade(9)">🗑️</button></td>
             </tr></tbody>
           </table>
         </div>
@@ -13401,16 +13420,17 @@ function loadTrades() {
             const color = r.side === 'Buy' || r.side === 'BUY' ? '#10b981' : '#f43f5e';
             const label = r.side === 'Buy' || r.side === 'BUY' ? '买入' : '卖出';
             const note = r.notes ? '<span class="trade-note">' + escapeHtml(r.notes) + '</span>' : '';
-            rows += '<tr><td>' + r.trade_date + '</td>' +
+            rows += '<tr data-trade-id="' + r.id + '"><td>' + r.trade_date + '</td>' +
               '<td class="td-name">' + escapeHtml(r.name) + '<span class="td-code">' + r.code + '</span></td>' +
               '<td><span class="side-badge" style="color:' + color + ';background:' + color + '1f;">' + label + '</span></td>' +
               '<td class="td-r">' + (r.price ? Number(r.price).toFixed(4) : '-') + '</td>' +
               '<td class="td-r">' + Number(r.shares).toLocaleString() + '</td>' +
               '<td class="td-r">¥' + Number(r.amount).toLocaleString('zh-CN',{minimumFractionDigits:2}) + '</td>' +
-              '<td>' + note + '</td></tr>';
+              '<td>' + note + '</td>' +
+              '<td class="td-actions"><button class="trade-edit-btn" onclick="editTrade(' + r.id + ')">✏️</button><button class="trade-del-btn" onclick="deleteTrade(' + r.id + ')">🗑️</button></td></tr>';
           }
           twrap.outerHTML = '<div class="table-wrap" id="tradeTableWrap"><table class="trade-table">' +
-            '<thead><tr><th>日期</th><th>股票</th><th>方向</th><th>价格</th><th>数量</th><th>金额</th><th>备注</th></tr></thead>' +
+            '<thead><tr><th>日期</th><th>股票</th><th>方向</th><th>价格</th><th>数量</th><th>金额</th><th>备注</th><th>操作</th></tr></thead>' +
             '<tbody>' + rows + '</tbody></table></div>';
         }
       }
@@ -13463,6 +13483,127 @@ function submitTrade() {
       msg.textContent = '在线模式无法保存。请在本地双击打开 index.html 后操作。';
     } else {
       msg.textContent = '无法连接本地服务 (8721)。请运行 update_api_server.py，或在本地双击打开 index.html。';
+    }
+  });
+}
+
+// ===== 我的交易：编辑 =====
+let _editingTradeId = null;
+function editTrade(id) {
+  // 从表格行回填表单
+  const row = document.querySelector('tr[data-trade-id="' + id + '"]');
+  if (!row) return;
+  const cells = row.querySelectorAll('td');
+  const date = cells[0]?.textContent?.trim() || '';
+  const nameEl = cells[1]?.querySelector('.td-name') || cells[1];
+  const name = cells[1]?.querySelector('.td-code') ? cells[1]?.firstChild?.textContent?.trim() : cells[1]?.textContent?.trim() || '';
+  const code = cells[1]?.querySelector('.td-code')?.textContent?.trim() || '';
+  const sideText = cells[2]?.textContent?.trim() || '';
+  const side = sideText === '卖出' ? 'SELL' : 'BUY';
+  const price = cells[3]?.textContent?.trim() || '';
+  const shares = cells[4]?.textContent?.replace(/,/g, '').trim() || '';
+  const amount = cells[5]?.textContent?.replace(/[¥,]/g, '').trim() || '';
+  const notes = cells[6]?.textContent?.trim() || '';
+
+  document.getElementById('t_date').value = date;
+  document.getElementById('t_code').value = code;
+  document.getElementById('t_name').value = name;
+  document.getElementById('t_side').value = side;
+  document.getElementById('t_price').value = price;
+  document.getElementById('t_shares').value = shares;
+  document.getElementById('t_amount').value = amount;
+  document.getElementById('t_notes').value = notes;
+
+  _editingTradeId = id;
+  const btn = document.getElementById('tradeSubmitBtn');
+  btn.textContent = '💾 保存修改';
+  btn.onclick = function(e) { e.preventDefault(); submitEdit(); };
+
+  // 滚动到表单
+  document.getElementById('tradeForm').scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+function submitEdit() {
+  const msg = document.getElementById('tradeMsg');
+  if (!_editingTradeId) return;
+  const payload = {
+    trade_date: document.getElementById('t_date').value,
+    code: document.getElementById('t_code').value,
+    name: document.getElementById('t_name').value,
+    side: document.getElementById('t_side').value,
+    price: parseFloat(document.getElementById('t_price').value) || 0,
+    shares: parseInt(document.getElementById('t_shares').value) || 0,
+    amount: parseFloat(document.getElementById('t_amount').value) || 0,
+    fee: 0,
+    notes: document.getElementById('t_notes').value,
+  };
+  if (!payload.trade_date || !payload.code || !payload.name || !payload.price || !payload.shares) {
+    msg.className = 'trade-form-msg err';
+    msg.textContent = '请填全日期/代码/名称/价格/数量';
+    return;
+  }
+  msg.textContent = '修改中...';
+  fetch(UPDATE_API + '/trade?id=' + _editingTradeId, {
+    method: 'PUT',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(payload),
+  }).then(r => r.json()).then(res => {
+    if (res.ok) {
+      msg.className = 'trade-form-msg ok';
+      msg.textContent = '✅ 已修改，正在刷新...';
+      document.getElementById('tradeForm').reset();
+      _editingTradeId = null;
+      const btn = document.getElementById('tradeSubmitBtn');
+      btn.textContent = '📝 提交交易';
+      btn.onclick = function(e) { e.preventDefault(); submitTrade(); };
+      setTimeout(loadTrades, 300);
+    } else {
+      msg.className = 'trade-form-msg err';
+      msg.textContent = '『' + (res.msg || '修改失败') + '』';
+    }
+  }).catch(function(e) {
+    msg.className = 'trade-form-msg err';
+    if (IS_HTTPS) {
+      msg.textContent = '在线模式无法修改。请在本地双击打开 index.html 后操作。';
+    } else {
+      msg.textContent = '无法连接本地服务 (8721)。';
+    }
+  });
+}
+
+// ===== 我的交易：删除 =====
+function deleteTrade(id) {
+  const row = document.querySelector('tr[data-trade-id="' + id + '"]');
+  if (!row) return;
+  const name = row.querySelector('.td-code') ? row.cells[1].firstChild.textContent.trim() : row.cells[1].textContent.trim();
+  const date = row.cells[0].textContent.trim();
+  if (!confirm('确认删除这条记录？
+
+' + date + ' ' + name + ' (id=' + id + ')
+
+此操作不可撤销。')) return;
+
+  fetch(UPDATE_API + '/trade?id=' + id, {
+    method: 'DELETE',
+  }).then(r => r.json()).then(res => {
+    if (res.ok) {
+      // 如果正在编辑这条记录，重置表单
+      if (_editingTradeId === id) {
+        document.getElementById('tradeForm').reset();
+        _editingTradeId = null;
+        const btn = document.getElementById('tradeSubmitBtn');
+        btn.textContent = '📝 提交交易';
+        btn.onclick = function(e) { e.preventDefault(); submitTrade(); };
+      }
+      loadTrades();
+    } else {
+      alert('删除失败：' + (res.msg || '未知错误'));
+    }
+  }).catch(function(e) {
+    if (IS_HTTPS) {
+      alert('在线模式无法删除。请在本地双击打开 index.html 后操作。');
+    } else {
+      alert('无法连接本地服务 (8721)。');
     }
   });
 }
